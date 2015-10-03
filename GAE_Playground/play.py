@@ -8,6 +8,7 @@ SECRET='pjiscool'
 
 
 from google.appengine.ext import db
+from ReadmyDatabase import getdata
 
 tempplate_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(tempplate_dir), autoescape=True)
@@ -160,16 +161,22 @@ class Match(Handler):
 		self.render("match.html")
 		print'-------------------------------'
 		print userinfo
-		newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
+		#Save input into the database uncomment this for application
+		'''newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
 			surname=userinfo["surname"],Languages=userinfo["Languages"],
 			Gender=userinfo["Gender"], Gender_Pref=userinfo["Gender_Pref"],
 			DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"],
 			Location=userinfo["Location"])
 
-		newuser.put()
+		newuser.put()'''
 
-		q=UserInfo.all()
+		#Create fake database. Comment this out later
+		mygetdata= getdata() #Initialise instance of class
+		mygetdata.createdatabase(UserInfo) #Import database
+		q=UserInfo.all() #Query database
 		print(q)
+		x=mygetdata.readdatabase(q) #run readydatabase.py method, readdatabase
+		print x
 
 
 ''' How to read the database https://cloud.google.com/appengine/docs/python/datastore/queries
