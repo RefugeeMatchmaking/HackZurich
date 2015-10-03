@@ -31,14 +31,16 @@ sudo apt-get install -y libpq-dev python3-dev libjpeg-dev libjpeg8 zlib1g libfre
 echo Downloading Pip...
 wget https://bootstrap.pypa.io/get-pip.py >/dev/null 2>&1
 python3 get-pip.py
-pip3 install -r /home/vagrant/requirements.txt
+pip3 install virtualenvwrapper
+pip3 install -r /refugee-matchmaking/requirements.txt
 
 # Echo virtualenvironment things into bashrc, also for python3 compatibility
 echo "
 VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
-export WORKON_HOME=/home/vagrant/.virtualenvs
-export PROJECT_HOME=/home/vagrant/
+export WORKON_HOME=/refugee-matchmaking/.virtualenvs
+export PROJECT_HOME=/refugee-matchmaking/
 source /usr/local/bin/virtualenvwrapper.sh
+cd /refugee-matchmaking/
 " >> /home/vagrant/.bashrc
 
 # Unmount swap
