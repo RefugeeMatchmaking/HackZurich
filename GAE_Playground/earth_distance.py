@@ -1,5 +1,6 @@
 import simplejson
 from urllib.request import urlopen
+from math import radians, cos, sin, asin, sqrt
 
 
 def get_earth_distance(loc1, loc2):
@@ -12,14 +13,20 @@ def get_earth_distance(loc1, loc2):
 	#print(result)
 	#driving_distance = result['rows'][0]['elements'][0]['distance']['value']/1000 # [km]
 	
-	lat1, lng1 = lat_long(loc1)
-	lat2, lng2 = lat_long(loc2)
+	lat1, lon1 = lat_long(loc1)
+	lat2, lon2 = lat_long(loc2)
 
-	
+	return haversine(lon1, lat1, lon2, lat2)
 
+def haversine(lon1, lat1, lon2, lat2):
+	lon1, lat1, lon2, lat3 = map(radians,[lon1, lat1, lon2, lat2])
 
-	return earth_distance
-
+	dlon = lon2 - lon1
+	dlat = lat2 - lat1
+	a = sin(dlat/2)**2 + cos(lat1)*cos(lat2)*sin(dlon/2)**2
+	c = 2*asin(sqrt(a))
+	r = 6371
+	return c*r
 
 
 if __name__ == "__main__":
