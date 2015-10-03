@@ -13,10 +13,10 @@ def get_earth_distance(loc1, loc2):
 	#print(result)
 	#driving_distance = result['rows'][0]['elements'][0]['distance']['value']/1000 # [km]
 	
-	'''lat1, lon1 = lat_long(loc1)
+	lat1, lon1 = lat_long(loc1)
 	lat2, lon2 = lat_long(loc2)
 
-	return haversine(lon1, lat1, lon2, lat2)'''
+	return haversine(lon1, lat1, lon2, lat2)
 
 	return 10
 

@@ -19,11 +19,13 @@ class getdata():
 
 
 
-	def readdatabase(self, database, node):
-		self.q=database
-		self.node=node
-		self.refugees=self.q.filter("Status=","refugee")
+	def readdatabase(self, querry, node):
+		q.filter("Status=","refugee").fetch(limit=5)
 		self.local=self.q.filter("Status=","local")
+		
+		print("list: " + str(database.fetch(limit = 5)))
+
+		print("node: " + str(self.node) + "\n local" + str(self.local) + "\n refugees" + str(self.refugees))
 		square=self.get_square(self.node, self.local, self.refugees)
 
 		return square
@@ -31,6 +33,11 @@ class getdata():
 	def get_square(self,node,local,refugees):
 		""" Returns a quadruplet of nodes refugee-refugee-local-local.
 			Incredibly rusty, but will work"""
+
+		
+		
+		print "printing user info: " + str(q)
+
 		frst = local
 		scnd = refugees
 		node = node

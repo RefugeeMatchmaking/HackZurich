@@ -8,10 +8,11 @@ import sys
 sys.path.insert(0, 'libs')
 
 SECRET='pjiscool'
-
+DATABASE_FETCH_LIMIT = 500 # max number of users to fetch from the db
 
 from google.appengine.ext import db
 from ReadmyDatabase import getdata
+from lat_long import *
 
 tempplate_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(tempplate_dir), autoescape=True)
@@ -30,6 +31,8 @@ class UserInfo(db.Model): #used to crete the database. Art is the name of the da
 	About=db.StringProperty(required=False)
 	Email=db.StringProperty(required=True)
 	Location=db.StringProperty(required=True)
+	Latitude = db.FloatProperty(required=True)
+	Longitude = db.FloatProperty(required=True)
 	#password=db.StringProperty(required=True)
 	created=db.DateTimeProperty(auto_now_add=True) #Automatically adds the time, check the docs
 
@@ -155,6 +158,11 @@ class Email(Handler):
 		email = self.request.get("Email")
 		if email != '':
 			userinfo["Email"] = email
+
+
+
+
+
 			self.redirect('/match')
 		else: 
 			self.redirect('/email')
@@ -167,27 +175,40 @@ class Match(Handler):
 		self.render("match.html")
 		print'-------------------------------'
 		print userinfo
+		
+		location = "Laax" #userinfo["Location"],
+		latitude, longitude = lat_long(location)
+
 		#Save input into the database uncomment this for application
 		'''newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
 			surname=userinfo["surname"],Languages=userinfo["Languages"],
 			Gender=userinfo["Gender"], Gender_Pref=userinfo["Gender_Pref"],
 			DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"],
-			Location=userinfo["Location"])'''
-		newuser=UserInfo(Status="refugee",firstname="Arnold",
-			surname="Schwarzeneger",Languages=["English"],
+			Location=location, Latitude=latitude, Longitude=longitude)'''
+		newuser=UserInfo(Status="refugee",firstname="Bertold",
+			surname="Brecht",Languages=["English"],
 			Gender="male", Gender_Pref="anyone",
 			DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
-			Location="Laax")
+			Location="Laax", Latitude=latitude, Longitude=longitude)
 
-		'''	newuser.put()'''
+		newuser.put()
 
 		#Create fake database. Comment this out later
-		mygetdata= getdata() #Initialise instance of class
+		#mygetdata= getdata() #Initialise instance of class
 		#mygetdata.createdatabase(UserInfo) #Import database
-		q=UserInfo.all() #Query database
-		print(q)
-		x=mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
-		print x
+		#Querry the db and 
+
+		#likely stupid and inefficient , but works :) 
+		q = UserInfo.all() 
+		local = q.filter("Status =", "local").fetch(limit=DATABASE_FETCH_LIMIT)
+		
+		q = UserInfo.all() 
+		refugees = q.filter("Status =", "refugee").fetch(limit=DATABASE_FETCH_LIMIT)
+		
+		print("newuser: " + str(newuser) + "\n refugees:" + str(refugees)+ "\n locals:"+str(local))
+		print(get_square(newuser,local,refugees))
+		#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
+		#print x
 
 
 ''' How to read the database https://cloud.google.com/appengine/docs/python/datastore/queries
@@ -210,5 +231,51 @@ app = webapp2.WSGIApplication([
 	('/match', Match),
 
 ], debug=True)
+
+
+
+def get_square(node,local,refugees):
+		""" Returns a quadruplet of nodes refugee-refugee-local-local.
+			Incredibly rusty, but will work"""
+
+
+		frst = local
+		scnd = refugees
+
+		# flip the lists if you start with a refugee
+		if node.Status == "refugee":
+			print("flipped")
+			frst = refugees
+			scnd = local
+
+		print(frst, scnd)
+
+		# Rusty as hell
+		biparts = {}
+
+		for friend in scnd:
+			for friend_of_friend in frst:
+				if friend_of_friend is node:
+					continue # skip itself
+				cost = 0#get_score(node,friend) + get_score(friend, friend_of_friend)
+				
+				if friend_of_friend in biparts:
+					biparts[friend_of_friend].append((friend, cost)) # slow 
+				else:
+					biparts[friend_of_friend] = [(friend, cost)]
+
+		highest = -float("inf")
+		square = []
+
+		# find the square
+		for fof in biparts:
+			two_relatives = sorted(biparts[fof], key=lambda tup: tup[1])[:2]
+			# if the quad score is highest in the network
+			new_cost = two_relatives[0][1] + two_relatives[1][1]
+			if new_cost > highest:
+				square = [node,two_relatives[0][0],fof,two_relatives[1][0]]
+				highest = new_cost
+
+		return square;
 
 
