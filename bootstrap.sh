@@ -41,6 +41,7 @@ export WORKON_HOME=/refugee-matchmaking/.virtualenvs
 export PROJECT_HOME=/refugee-matchmaking/
 source /usr/local/bin/virtualenvwrapper.sh
 cd /refugee-matchmaking/
+workon refugee_matchmaking
 " >> /home/vagrant/.bashrc
 
 # Unmount swap
