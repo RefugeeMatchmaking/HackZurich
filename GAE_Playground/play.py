@@ -4,6 +4,7 @@ import jinja2
 import hmac #Used for hashing 
 import re #regular expression
 #Get networkx library from lib folder
+from google.appengine.api import mail
 import sys 
 sys.path.insert(0, 'libs')
 
@@ -158,12 +159,13 @@ class Email(Handler):
 		email = self.request.get("Email")
 		if email != '':
 			userinfo["Email"] = email
-
-
-
-
-
-			self.redirect('/match')
+			if mail.is_email_valid(email):
+				sender_address = "refugeelighthouse@gmail.com Support <refugeelighthouse@gmail.com>"
+				subject = "Confirm your registration"
+				body = " Thank you for creating an account!"
+				mail.send_mail(sender_address, email, subject, body)
+				print 'email sent'
+				self.redirect('/match')
 		else: 
 			self.redirect('/email')
 

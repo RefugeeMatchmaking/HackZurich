@@ -1,0 +1,12 @@
+			if mail.is_email_valid(email):
+				sender_address = "refugeelighthouse@gmail.com Support <refugeelighthouse@gmail.com>"
+				subject = "Confirm your registration"
+				body = " Thank you for creating an account!"
+				mail.send_mail(sender_address, email, subject, body)
+				print 'email sent'
+				self.redirect('/match')
+
+
+
+
+				from google.appengine.api import mail
