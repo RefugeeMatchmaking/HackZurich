@@ -67,7 +67,7 @@ def age_rank(usr1_dob, usr2_dob, matchrank):
 	elif age_host > age_ref * 0.8 and age_host < age_ref * 1.2: #+-20%
 		matchrank+=3
 
-	elif age_host > age_ref * 0.6 and age_host < age_ref * 1.6: #+-30%
+	elif age_host > age_ref * 0.6 and age_host < age_ref * 1.6: #+-40%
 		matchrank+=1
 	else:
 		matchrank = 0 # nogo condition

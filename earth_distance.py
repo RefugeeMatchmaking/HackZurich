@@ -9,6 +9,7 @@ def get_earth_distance(loc1, loc2):
 	
 	result= simplejson.load(urlopen(url))
 	
+	print(result)
 	driving_distance = result['rows'][0]['elements'][0]['distance']['value']/1000 # [km]
 	
 	return driving_distance
