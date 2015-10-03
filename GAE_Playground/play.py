@@ -14,6 +14,7 @@ DATABASE_FETCH_LIMIT = 500 # max number of users to fetch from the db
 from google.appengine.ext import db
 from ReadmyDatabase import getdata
 from lat_long import *
+from get_score import *
 
 tempplate_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(tempplate_dir), autoescape=True)
@@ -285,7 +286,7 @@ def get_square(node,local,refugees):
 			for friend_of_friend in frst:
 				if friend_of_friend is node:
 					continue # skip itself
-				cost = 0#get_score(node,friend) + get_score(friend, friend_of_friend)
+				cost = get_score(node,friend) + get_score(friend, friend_of_friend)
 				
 				if friend_of_friend in biparts:
 					biparts[friend_of_friend].append((friend, cost)) # slow 

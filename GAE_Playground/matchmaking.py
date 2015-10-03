@@ -36,7 +36,7 @@ def gender_preference_rank(gender_ref, gender_host, genderpref_ref, genderpref_h
 		matchrank+=1 # no problems here
 
 	else: 
-		matchrank = 0 # nogo condition
+		matchrank = -1 # nogo condition
 		
 
 	return matchrank
