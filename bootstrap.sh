@@ -31,7 +31,7 @@ sudo apt-get install -y libpq-dev python3-dev libjpeg-dev libjpeg8 zlib1g libfre
 echo Downloading Pip...
 wget https://bootstrap.pypa.io/get-pip.py >/dev/null 2>&1
 python3 get-pip.py
-pip3 install -r /vagrant/requirements.txt
+pip3 install -r /home/vagrant/requirements.txt
 
 # Echo virtualenvironment things into bashrc, also for python3 compatibility
 echo "
