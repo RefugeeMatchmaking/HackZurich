@@ -81,9 +81,10 @@ def language_rank(languages_ref, languages_host, matchrank):
 	lanrank = 0
 
 	# language will be comma or colon separated string
-	languages_ref = re.split('; |, ',languages_ref)
-	languages_host = re.split('; |, ',languages_host)
+	#languages_ref = re.split('; |, ',languages_ref)
+	#languages_host = re.split('; |, ',languages_host)
 	
+
 	languages_ref =[str(lan).lower() for lan in languages_ref]
 	languages_host =[str(lan).lower() for lan in languages_host]
 
@@ -123,8 +124,8 @@ if __name__ == '__main__':
 
 	print('---- testing language rank ----')
 	matchrank = 0
-	languages_ref = 'English, Spanish, German'
-	languages_host = 'English; German; Italian'
+	languages_ref = ['English', 'Spanish', 'German']
+	languages_host = ['English', 'German', 'Italian']
 	print(languages_ref)
 	print(languages_host)
 	matchrank = language_rank(languages_ref,languages_host,matchrank)
