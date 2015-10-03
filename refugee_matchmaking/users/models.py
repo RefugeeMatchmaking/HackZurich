@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import uuid
 
 class User(models.Model):
     GENDER = (
@@ -11,6 +12,7 @@ class User(models.Model):
         ('0', 'Refugee'),
         ('1', 'Local'),
     )
+    user_key = models.CharField(max_length=10, editable=False, primary_key=True, unique=True)
     refugee_or_local = models.CharField(choices=STATUS, max_length=1)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -25,6 +27,11 @@ class User(models.Model):
     social_media = models.URLField(max_length=200, blank=True)
     submitted  = models.DateTimeField(default=timezone.now, editable=False)
     submission_ip = models.GenericIPAddressField(protocol='both')
+    def save(self):
+        if not self.user_key:
+            self.user_key = uuid.uuid1().hex[:10]
+        super(User, self).save()
+
     def __str__(self):
         return self.last_name
 
