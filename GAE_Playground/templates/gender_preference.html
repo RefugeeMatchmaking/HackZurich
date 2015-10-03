@@ -25,13 +25,21 @@
     </div>
     <div class="row"> 
         <h6> Who would you prefer to be matched with? </h6>
-        <a class="button" href="">My own gender</a>  
-        <a class="button" href="">Anyone</a>  
+        <form method="post">
+        <input type="radio" name="gender_pref" value="own"> My Own Gender
+        <br>
+        <input type="radio" name="gender_pref" value="anyone"> Anyone
+        <br>
+    </div> 
+        <div class="row">  <hr>
+     <a class="button" href="gender">Back</a>
+        <input type="submit" value="Next">     
+        </form> 
     </div>
-    <div class="row">  <hr>
+    <!--<div class="row">  <hr>
      <a class="button" href="gender">Back</a>
      <a class="button" href="about-yourself">Skip</a>
-  </div>
+  </div>-->
 
 </body>
 </html>

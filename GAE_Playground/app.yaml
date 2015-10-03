@@ -4,8 +4,13 @@ api_version: 1
 threadsafe: true
 
 handlers:
+- url: /css
+  static_dir: css
+
 - url: /.*
   script: play.app
+
+
 
 libraries:
 - name: jinja2

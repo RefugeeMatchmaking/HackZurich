@@ -14,17 +14,6 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(tempplate_dir), 
 
 
 
-def hash_str(s): #funciton to has a string with a secret string
-	return hmac.new(SECRET, s).hexdigest()
-
-def make_secure_val(s): #runs the hash_str function to make a secure value
-	return "%s|%s" %(s,hash_str(s))
-
-def check_secure_val(h): #checks the input from the browser against our hash
-	val=h.split('|')[0]
-	if h==make_secure_val(val):
-		return val
-
 class UserInfo(db.Model): #used to crete the database. Art is the name of the databse
 	user=db.StringProperty(required=True) #required = true adds the constraint
 	email=db.StringProperty(required=False)
@@ -53,33 +42,48 @@ class Names(Handler):
 	def get(self):
 		self.render("refugee.html")
 
+	def post(self):
+		self.redirect('/languages')
+
 class Languages(Handler):
 	def get(self):
 		self.render("languages.html")
+	def post(self):
+		self.redirect('/gender')
 
 class Gender(Handler):
 	def get(self):
 		self.render("gender.html")
+	def post(self):
+		self.redirect('/gender_preference')
 
 class Gender_Pref(Handler):
 	def get(self):
 		self.render("gender_preference.html")
+	def post(self):
+		self.redirect('/dob')
 
 class DOB(Handler):
 	def get(self):
 		self.render("dob.html")
+	def post(self):
+		self.redirect('/about-yourself')
 
 class AboutYou(Handler):
 	def get(self):
 		self.render("about-yourself.html")
+	def post(self):
+		self.redirect('/email')
 
 class Email(Handler):
 	def get(self):
 		self.render("email.html")
+	def post(self):
+		self.redirect('/match')
 
 class Match(Handler):
 	def get(self):
-		self.render("refugee.html")
+		self.render("match.html")
 
 
 

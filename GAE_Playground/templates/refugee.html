@@ -1,51 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
+{% block content %}
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Lighthouse</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-</head>
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<body>
-  <div class="container">
-    <div class="row"> 
-      <div class="two-thirds column" style="margin-top: 20%">
-        <h1 class="title">Ligthouse</h1>
-        <h5>We guide refugees find new homes</h5>
-        <hr>
+      <div class="row"> 
+        <h6> Please fill in the following: </h6>
+        <form method="post">
+          <label for="firstname"> First name </label>  
+          <input class="u-full-width" type="text" placeholder="Arnold" id="firstname" name="firstname"> </br>
+          <label for="surname"> Surname </label>  
+          <input class="u-full-width" type="text" placeholder="Schwarzeneger" id="surname" name="surname"> </br>
+          <hr>
+          <a class="button" href="index">Back</a>
+          <input type="submit" value="Next">
+        </form>
       </div>
     </div>
-    <div class="row"> 
-    <h6> Please fill in the following: </h6>
-        <label for="firstname"> First name </label>  
-        <input class="u-full-width" type="text" placeholder="Arnold" id="firstname"> </br>
-        <label for="surname"> Surname </label>  
-        <input class="u-full-width" type="text" placeholder="Schwarzeneger" id="surname"> </br>
-        <hr>
-        <a class="button" href="index">Back</a>
-        <a class="button" href="languages">Next</a>
-      </div>
-  </div>
-</body>
-</html>
+  </body>
+  </html>
+
+{% endblock %}

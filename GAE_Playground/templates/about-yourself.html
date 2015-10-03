@@ -32,17 +32,19 @@
     <div class="row"> 
       <div class="two-thirds column" style="margin-top: 20%">
         <h1 class="title">Ligthouse</h1>
-        <h5>We guide refugees find new homes</h5>
+        <h5>We guide refugees to find local friends</h5>
         <hr>
       </div>
     </div>
     <div class="row"> 
     <h6> Tell us something about yourself so we can find you suitable matches </h6>
         <label for="about">About Yourself</label>
-  <textarea class="u-full-width" placeholder="" id="about"></textarea>
+        <form method="post" id="myform">
+  <textarea class="u-full-width" name="about" form"myform" placeholder="" id="about"></textarea>
         <hr>
         <a class="button" href="gender_preference">Back</a>
-        <a class="button" href="email">Next</a>
+        <input type="submit" name="Next">
+      </form>
       </div>
   </div>
 </body>
