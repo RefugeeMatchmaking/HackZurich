@@ -13,11 +13,18 @@ tempplate_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(tempplate_dir), autoescape=True)
 
 userinfo={"Status":"","firstname":"","surname":"","Languages":[],"Gender":"","Gender_Pref":"","DOB":"",
-	"About":"","email":""}
+	"About":"","Email":""}
 
 class UserInfo(db.Model): #used to crete the database. Art is the name of the databse
-	user=db.StringProperty(required=True) #required = true adds the constraint
-	email=db.StringProperty(required=False)
+	Status=db.StringProperty(required=True) #required = true adds the constraint
+	firstname=db.StringProperty(required=True)
+	surname=db.StringProperty(required=True)
+	Language=db.StringListProperty(required=True)
+	Gender=db.StringProperty(required=True)
+	Gender_Pref=db.StringProperty(required=True)
+	DOB=db.StringProperty(required=True)
+	About=db.StringProperty(required=False)
+	Email=db.StringProperty(required=True)
 	#password=db.StringProperty(required=True)
 	created=db.DateTimeProperty(auto_now_add=True) #Automatically adds the time, check the docs
 
@@ -140,8 +147,12 @@ class Match(Handler):
 		self.render("match.html")
 		print'-------------------------------'
 		print userinfo
+		newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
+			surname=userinfo["surname"],Languages=userinfo["Languages"],
+			Gender=userinfo["Gender"], Gender_Pref=userinfo["Gender_Pref"],
+			DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"])
 
-
+		newuser.put()
 
 app = webapp2.WSGIApplication([
 	('/index', Index),
