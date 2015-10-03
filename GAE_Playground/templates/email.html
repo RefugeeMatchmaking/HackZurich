@@ -1,54 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
+{% block content %}
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Lighthouse</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+<div class="row"> 
+  <h6> Please provide a valid email address</h6>
+  <label for="email"> E-mail </label>  
+  <form method="post">
+    <input class="u-full-width" type="email" placeholder="arnoldschwarzeneger@hackzurich.ch" id="email" name="Email"> </br>
+    <hr>
+    <a class="button" href="about-yourself">Back</a>
+    <input type="submit" name="Find Matches"</a>
+  </form>
+  <label for="agbcheck">
+   <input type="checkbox" name="agb" value="" id="agbcheck">
+   I have read and agreed to the terms and conditions
+ </label> 
+ <center><a href="agb.html">Terms of Use</a></center>
+</div>
+</div>
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-</head>
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<body>
-  <div class="container">
-    <div class="row"> 
-      <div class="two-thirds column" style="margin-top: 20%">
-        <h1 class="title">Ligthouse</h1>
-        <h5>We guide refugees find new homes</h5>
-        <hr>
-      </div>
-    </div>
-    <div class="row"> 
-    <h6> Please provide a valid email address</h6>
-          <label for="email"> E-mail </label>  
-        <input class="u-full-width" type="text" placeholder="arnoldschwarzeneger@hackzurich.ch" id="email"> </br>
-        <hr>
-        <a class="button" href="about-yourself">Back</a>
-        <a class="button" href="match">Find Matches</a>
-        <label for="agbcheck">
-       <input type="checkbox" name="agb" value="" id="agbcheck">
-       I have read and agreed to the terms and conditions
-    </label> 
-    <center><a href="agb.html">Terms of Use</a></center>
-      </div>
-  </div>
-</body>
-</html>
+{% endblock %}
