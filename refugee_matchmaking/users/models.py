@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from ipware.ip import get_ip
 import uuid
 
 class User(models.Model):
@@ -26,7 +27,8 @@ class User(models.Model):
     birthdate = models.DateField()
     social_media = models.URLField(max_length=200, blank=True)
     submitted  = models.DateTimeField(default=timezone.now, editable=False)
-    submission_ip = models.GenericIPAddressField(protocol='both')
+    submission_ip = models.GenericIPAddressField(protocol='both', blank=True, null=True)
+
     def save(self):
         if not self.user_key:
             self.user_key = uuid.uuid1().hex[:10]
@@ -36,7 +38,7 @@ class User(models.Model):
         return self.last_name
 
 class Language(models.Model):
-	language = models.CharField(max_length=100)
+	language = models.CharField(max_length=100, blank=True)
 	user = models.ForeignKey(User)
 	def __str__(self):
 		return self.language
