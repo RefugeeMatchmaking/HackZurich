@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+	<form method="post">
+		<input type="radio" name="Feedback" value="positive" checked="true"> Match was great
+          <br>
+          <input type="radio" name="Feedback" value="noreply"> My matches wouldn't reply
+          <br>
+          <input type="radio" name="Feedback" value="complaint" checked="true"> I would like to post a complaint about my match
+          <br>
+          <input type="radio" name="Feedback" value="wrongdata"> My Match lied about their profile
+          <br>
+		<input type="submit" value="Submit Feedback">
+
+	</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+	<form method="post">
+		<label for="location_country" class="control-label">Re-enter Email</label>
+		<input type="text" name="email" value="{{email}}">{{errorEmail}}<br>
+		<label for="location_country" class="control-label">Password</label>
+		<input type="Password" name="password"> {{errorPass}}<br>
+		<label for="location_country" class="control-label">Verify Password</label>
+		<input type="Password" name="verify"> {{errorVerify}}<br>
+
+		<input type="submit" value="Register">
+
+	</form>
+</div>
+
+{% endblock %}

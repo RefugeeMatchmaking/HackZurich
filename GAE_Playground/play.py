@@ -189,6 +189,29 @@ class Match(Handler):
 		x=mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 		print x
 
+	def post(self):
+		self.redirect('/register')
+
+class Register(Handler):
+	def get(self):
+		self.render("register.html")
+
+	def post(self):
+		print '-----------------'
+		self.redirect('/review')
+
+
+class Review(Handler):
+	def get(self):
+		self.render("review.html")
+
+	def post(self):
+		self.redirect('/thankyou')
+
+class ThankYou(Handler):
+	def get(self):
+		self.render("thankyou.html")
+
 
 ''' How to read the database https://cloud.google.com/appengine/docs/python/datastore/queries
 		database=db.GqlQuery("SELECT * FROM UserInfo")
@@ -208,6 +231,9 @@ app = webapp2.WSGIApplication([
 	('/email', Email),
 	('/location',Location),
 	('/match', Match),
+	('/register', Register),
+	('/review', Review),
+	('/thankyou', ThankYou),
 
 ], debug=True)
 
