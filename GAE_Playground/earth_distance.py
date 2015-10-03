@@ -1,7 +1,7 @@
 import simplejson
 from urllib.request import urlopen
 from math import radians, cos, sin, asin, sqrt
-
+from lat_long import *
 
 def get_earth_distance(loc1, loc2):
 	'''Function that returns the driving distance between two locations'''
@@ -26,7 +26,7 @@ def haversine(lon1, lat1, lon2, lat2):
 	a = sin(dlat/2)**2 + cos(lat1)*cos(lat2)*sin(dlon/2)**2
 	c = 2*asin(sqrt(a))
 	r = 6371
-	return c*r
+	return c*r #[m]
 
 
 if __name__ == "__main__":
