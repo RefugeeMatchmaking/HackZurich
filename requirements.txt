@@ -1,3 +1,4 @@
 django
 virtualenvwrapper
 Pillow
+django-grappelli
