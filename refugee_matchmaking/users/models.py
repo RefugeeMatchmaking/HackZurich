@@ -1,11 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-class Language(models.Model):
-	language = models.CharField(max_length=100)
-	def __str__(self):
-		return self.language
-
 class User(models.Model):
     GENDER = (
         ('0', 'Female'),
@@ -24,7 +19,6 @@ class User(models.Model):
     about = models.TextField()
     picture = models.ImageField(blank=True)
     email = models.EmailField(max_length=254)
-    langauge = models.ManyToManyField(Language)
     gender = models.CharField(choices=GENDER, max_length=1)
     gender_preference = models.CharField(blank=True, choices=GENDER, max_length=1)
     birthdate = models.DateField()
@@ -33,3 +27,9 @@ class User(models.Model):
     submission_ip = models.GenericIPAddressField(protocol='both')
     def __str__(self):
         return self.last_name
+
+class Language(models.Model):
+	language = models.CharField(max_length=100)
+	user = models.ForeignKey(User)
+	def __str__(self):
+		return self.language

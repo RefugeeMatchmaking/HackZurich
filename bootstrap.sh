@@ -25,15 +25,7 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 
 # Installation of foodcampus-specific packages
-<<<<<<< HEAD
-<<<<<<< HEAD
-sudo apt-get install -y libpq-dev python3-dev libjpeg8 zlibg1 libtiff libfreetype
-=======
-sudo apt-get install -y libpq-dev python3-dev libjpeg-dev zlib1g libfreetype6
->>>>>>> 713bd6bf336d842b6058d7e102e4dd70c184661e
-=======
 sudo apt-get install -y libpq-dev python3-dev libjpeg-dev libjpeg8 zlib1g libfreetype6
->>>>>>> b30d1869f4433eda6889fa4031a05f98c30c9e7f
 
 # Insall everything
 echo Downloading Pip...
