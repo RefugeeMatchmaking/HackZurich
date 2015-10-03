@@ -2,3 +2,4 @@ django
 virtualenvwrapper
 Pillow
 django-grappelli
+django-nested-inline
