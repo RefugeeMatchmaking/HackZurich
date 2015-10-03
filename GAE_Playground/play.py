@@ -80,7 +80,7 @@ class Languages(Handler):
 		if q[0] != '' or q[1] != '' or q[2] != '':
 			userinfo["Languages"]=q
 			print userinfo	
-			self.redirect('/gender')
+			self.redirect('/gender', )
 		else:
 			self.redirect('/languages')
 
