@@ -8,7 +8,6 @@ def get_earth_distance(loc1, loc2):
 	url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}&mode=driving&language=en-EN&sensor=false".format(str(loc1),str(loc2))
 	
 	result= simplejson.load(urlopen(url))
-	
 	driving_distance = result['rows'][0]['elements'][0]['distance']['value']/1000 # [km]
 	
 	return driving_distance
