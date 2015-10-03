@@ -168,6 +168,8 @@ class Match(Handler):
 
 		newuser.put()
 
+		q=userinfo.all()
+		print(q)
 
 ''' How to read the database https://cloud.google.com/appengine/docs/python/datastore/queries
 		database=db.GqlQuery("SELECT * FROM UserInfo")
