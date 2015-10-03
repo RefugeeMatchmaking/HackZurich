@@ -4,7 +4,7 @@ import jinja2
 import hmac #Used for hashing 
 import re #regular expressions
 
-SECRET='pjiscool'
+SECRET='pjisreallycool'
 
 
 from google.appengine.ext import db
