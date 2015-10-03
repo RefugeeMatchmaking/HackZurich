@@ -25,7 +25,6 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
-
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <body>
@@ -37,14 +36,13 @@
         <hr>
       </div>
     </div>
-     <div class="row"> 
-      <h6> Are you a refugee or a local? </h6>
-        <a class="button" href="refugee.html">Refugee</a>  
-        <a class="button" href="refugee.html">Local</a>  
-    </div>
+    <div class="row"> 
+    <h5> Tell us something about yourself </h5>
+        <label for="about">About Yourself</label>
+  <textarea class="u-full-width" placeholder="" id="about"></textarea>
+        <hr>
+        <a class="button" href="Gender">Next</a>
+      </div>
   </div>
-
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>

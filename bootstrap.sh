@@ -15,7 +15,7 @@ export UCF_FORCE_CONFFNEW=YES
 ucf --purge /boot/grub/menu.lst
 
 export DEBIAN_FRONTEND=noninteractive
-#apt-get update
+apt-get update
 # sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-confold" --force-yes -fuy dist-upgrade
 
 # Create swap space for installation of lxml https://stackoverflow.com/a/26762938
@@ -26,23 +26,30 @@ sudo swapon /swapfile
 
 # Installation of foodcampus-specific packages
 <<<<<<< HEAD
+<<<<<<< HEAD
 sudo apt-get install -y libpq-dev python3-dev libjpeg8 zlibg1 libtiff libfreetype
 =======
 sudo apt-get install -y libpq-dev python3-dev libjpeg-dev zlib1g libfreetype6
 >>>>>>> 713bd6bf336d842b6058d7e102e4dd70c184661e
+=======
+sudo apt-get install -y libpq-dev python3-dev libjpeg-dev libjpeg8 zlib1g libfreetype6
+>>>>>>> b30d1869f4433eda6889fa4031a05f98c30c9e7f
 
 # Insall everything
 echo Downloading Pip...
 wget https://bootstrap.pypa.io/get-pip.py >/dev/null 2>&1
 python3 get-pip.py
-pip3 install -r /vagrant/requirements.txt
+pip3 install virtualenvwrapper
+pip3 install -r /refugee-matchmaking/requirements.txt
 
 # Echo virtualenvironment things into bashrc, also for python3 compatibility
 echo "
 VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
-export WORKON_HOME=/vagrant/.virtualenvs
-export PROJECT_HOME=/vagrant/
+export WORKON_HOME=/refugee-matchmaking/.virtualenvs
+export PROJECT_HOME=/refugee-matchmaking/
 source /usr/local/bin/virtualenvwrapper.sh
+cd /refugee-matchmaking/
+workon refugee_matchmaking
 " >> /home/vagrant/.bashrc
 
 # Unmount swap
