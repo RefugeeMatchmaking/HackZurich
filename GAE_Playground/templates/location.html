@@ -1,21 +1,5 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-</head>
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<body>
-  <div class="container">
+{% extends "base.html" %}
+{% block content %}
     <div class="row"> 
       <div class="two-thirds column" style="margin-top: 20%">
         <h1 class="title">Ligthouse</h1>
@@ -418,6 +402,4 @@
     <div class="row">  <hr>
     <a class="button" href="gender_preference.html">Next</a>
      <a class="button" href="gender_preference.html">Skip</a>
-  </div>
-</body>
-</html>
+{% endblock %}

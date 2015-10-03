@@ -67,8 +67,6 @@ class Names(Handler):
 			print("Choose a valid name - print this" )
 			pass;
 
-
-
 class Languages(Handler):
 	def get(self):
 		self.render("languages.html")
