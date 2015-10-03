@@ -5,7 +5,7 @@ def get_score(User1, User2):
 	matchrank = 0
 
 	#check if one if host and one is refugee
-	if User1.status == User2.status:
+	if User1.Status == User2.Status:
 		return -1 # both hosts or refugees
 
 	#by location

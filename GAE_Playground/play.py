@@ -2,7 +2,10 @@ import os
 import webapp2
 import jinja2
 import hmac #Used for hashing 
-import re #regular expressions
+import re #regular expression
+#Get networkx library from lib folder
+import sys 
+sys.path.insert(0, 'libs')
 
 SECRET='pjiscool'
 
@@ -166,16 +169,21 @@ class Match(Handler):
 			surname=userinfo["surname"],Languages=userinfo["Languages"],
 			Gender=userinfo["Gender"], Gender_Pref=userinfo["Gender_Pref"],
 			DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"],
-			Location=userinfo["Location"])
+			Location=userinfo["Location"])'''
+		newuser=UserInfo(Status="refugee",firstname="Arnold",
+			surname="Schwarzeneger",Languages=["English"],
+			Gender="male", Gender_Pref="anyone",
+			DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
+			Location="Laax")
 
-		newuser.put()'''
+		'''	newuser.put()'''
 
 		#Create fake database. Comment this out later
 		mygetdata= getdata() #Initialise instance of class
-		mygetdata.createdatabase(UserInfo) #Import database
+		#mygetdata.createdatabase(UserInfo) #Import database
 		q=UserInfo.all() #Query database
 		print(q)
-		x=mygetdata.readdatabase(q) #run readydatabase.py method, readdatabase
+		x=mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 		print x
 
 

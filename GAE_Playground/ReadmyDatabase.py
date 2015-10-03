@@ -1,3 +1,9 @@
+# The idea is to get an algorithm to find a suitable triples refugee-refugee-local-local
+# Advantages: 2 on 2 should a balanced and neutral group. 
+# Disadvantages: it might be hard to choose 2 refugees
+
+import networkx as nx 
+from get_score import *
 
 
 class getdata():
@@ -62,6 +68,5 @@ class getdata():
 
 		return square;
 
-		return None
 
 
