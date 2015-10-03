@@ -9,7 +9,7 @@ SECRET='pjiscool'
 
 from google.appengine.ext import db
 
-tempplate_dir= os.path.join(os.path.dirname(__file__),'templates')
+tempplate_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(tempplate_dir), autoescape=True)
 
 userinfo={"Status":"","firstname":"","surname":"","Languages":[],"Gender":"","Gender_Pref":"","DOB":"",
@@ -44,7 +44,7 @@ class Index(Handler):
 
 	def post(self):
 		userinfo["Status"]=self.request.get("Status")
-		print userinfo		
+		print (str(userinfo))		
 		self.redirect('/refugee')
 
 class Names(Handler):
@@ -53,24 +53,38 @@ class Names(Handler):
 
 
 	def post(self):
-		userinfo["firstname"]=self.request.get("firstname")
-		userinfo["surname"]=self.request.get("surname")
-		print userinfo	
-		self.redirect('/languages')
+		first = self.request.get("firstname")
+		last = self.request.get("surname")
+		
+		userinfo["firstname"] = first
+		userinfo["surname"] = last
+
+		if first != '' and last != '': 
+			print userinfo	
+			self.redirect('/languages')
+		else: 
+			self.redirect('/refugee')
+			print("Choose a valid name - print this" )
+			pass;
 
 
 
 class Languages(Handler):
 	def get(self):
 		self.render("languages.html")
+
 	def post(self):
 		q=[]
 		q.append(self.request.get("native"))
 		q.append(self.request.get("foreign1"))
 		q.append(self.request.get("foreign2"))
-		userinfo["Languages"]=q
-		print userinfo	
-		self.redirect('/gender')
+		
+		if q[0] != '' or q[1] != '' or q[2] != '':
+			userinfo["Languages"]=q
+			print userinfo	
+			self.redirect('/gender')
+		else:
+			self.redirect('/languages')
 
 class Gender(Handler):
 	def get(self):
@@ -93,9 +107,13 @@ class DOB(Handler):
 	def get(self):
 		self.render("dob.html")
 	def post(self):
-		userinfo["DOB"]=self.request.get("DOB")
-		print userinfo
-		self.redirect('/about-yourself')
+		dob = self.request.get("DOB")
+		if dob !=  '' :
+			userinfo["DOB"] = dob
+			print userinfo
+			self.redirect('/about-yourself')
+		else:
+			self.redirect('/dob')
 
 class AboutYou(Handler):
 	def get(self):
@@ -110,10 +128,14 @@ class Email(Handler):
 		self.render("email.html")
 		print 'email received'
 	def post(self):
-		userinfo["Email"]=self.request.get("Email")
-		print 'i was here'
-		print userinfo
-		self.redirect('/match')
+		email = self.request.get("Email")
+		if email != '':
+			userinfo["Email"] = email
+			print userinfo
+			self.redirect('/match')
+		else: 
+			self.redirect('/email')
+		
 
 class Match(Handler):
 	def get(self):
