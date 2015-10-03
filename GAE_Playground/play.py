@@ -69,11 +69,23 @@ class Names(Handler):
 
 		if first != '' and last != '': 
 			print userinfo	
-			self.redirect('/languages')
+			self.redirect('/location')
 		else: 
 			self.redirect('/refugee')
 			print("Choose a valid name - print this" )
 			pass;
+
+class Location(Handler):
+	def get(self):
+		self.render("location.html")
+	def post(self):
+		Location = self.request.get("Location")
+		if Location != '':
+			userinfo["Location"] = Location
+			self.redirect('/languages')
+		else: 
+			self.redirect('/location')
+
 
 class Languages(Handler):
 	def get(self):
@@ -136,20 +148,11 @@ class Email(Handler):
 		email = self.request.get("Email")
 		if email != '':
 			userinfo["Email"] = email
-			self.redirect('/location')
+			self.redirect('/match')
 		else: 
 			self.redirect('/email')
 
-class Location(Handler):
-	def get(self):
-		self.render("location.html")
-	def post(self):
-		Location = self.request.get("Location")
-		if Location != '':
-			userinfo["Location"] = Location
-			self.redirect('/match')
-		else: 
-			self.redirect('/location')
+
 		
 
 class Match(Handler):
@@ -164,6 +167,10 @@ class Match(Handler):
 			Location=userinfo["Location"])
 
 		newuser.put()
+
+		q=UserInfo.all()
+		print(q)
+
 
 ''' How to read the database https://cloud.google.com/appengine/docs/python/datastore/queries
 		database=db.GqlQuery("SELECT * FROM UserInfo")
