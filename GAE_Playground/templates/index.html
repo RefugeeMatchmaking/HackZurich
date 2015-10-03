@@ -2,8 +2,16 @@
 {% block content %}
       <div class="row"> 
         <h6> Are you a refugee or a local? </h6>
-        <a class="button" href="\refugee">Refugee</a>  
-        <a class="button" href="\refugee">Local</a>  
+        <form method="post">
+          <input type="radio" name="Status" value="refugee"> Refugee
+          <br>
+          <input type="radio" name="Status" value="local"> Local
+          <br>
+        </div> 
+        <div class="row">  <hr>
+         <a class="button" href="languages">Back</a>
+         <input type="submit" value="Next">     
+       </form>  
       </div>
 
 {% endblock %}

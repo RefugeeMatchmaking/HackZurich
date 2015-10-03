@@ -32,18 +32,32 @@ class Handler(webapp2.RequestHandler):
 	def render(self, template, **kw):
 		self.write(self.render_str(template, **kw))
 
+	userinfo={"Status":"","firstname":"","surname":"","Languages":[],"Gender":"","Gender_Pref":"","DOB":"",
+	"About":"","email":""}
+
 
 class Index(Handler):
 	def get(self):
 		self.render("index.html")
 
+	def post(self):
+		Handler.userinfo["Status"]=self.request.get("Status")
+		print Handler.userinfo		
+		self.redirect('/refugee')
 
 class Names(Handler):
 	def get(self):
 		self.render("refugee.html")
 
+
 	def post(self):
+		Handler.userinfo["firstname"]=self.request.get("firstname")
+		Handler.userinfo["firstname"]=self.request.get("surname")
+
+		print Handler.userinfo	
 		self.redirect('/languages')
+
+
 
 class Languages(Handler):
 	def get(self):
