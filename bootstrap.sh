@@ -15,7 +15,7 @@ export UCF_FORCE_CONFFNEW=YES
 ucf --purge /boot/grub/menu.lst
 
 export DEBIAN_FRONTEND=noninteractive
-apt-get update
+#apt-get update
 # sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-confold" --force-yes -fuy dist-upgrade
 
 # Create swap space for installation of lxml https://stackoverflow.com/a/26762938
@@ -27,10 +27,20 @@ sudo swapon /swapfile
 # Installation of foodcampus-specific packages
 apt-get install -y libpq-dev python3-dev
 
-# Installation of django stuff
-wget https://bootstrap.pypa.io/get-pip.py
-sudo python3 get-pip.py
-sudo pip3 install -r /vagrant/requirements.txt
+# Insall everything
+echo Downloading Pip...
+wget https://bootstrap.pypa.io/get-pip.py >/dev/null 2>&1
+python3 get-pip.py
+pip3 install -r /vagrant/requirements.txt
+
+# Echo virtualenvironment things into bashrc, also for python3 compatibility
+echo "
+VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
+export WORKON_HOME=/vagrant/.virtualenvs
+export PROJECT_HOME=/vagrant/
+source /usr/local/bin/virtualenvwrapper.sh
+" >> /home/vagrant/.bashrc
 
 # Unmount swap
 sudo swapoff -a
+sudo locale-gen en_US.UTF-8
