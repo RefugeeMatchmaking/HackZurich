@@ -77,9 +77,15 @@ def age_rank(usr1_dob, usr2_dob, matchrank):
 
 def language_rank(languages_ref, languages_host, matchrank):
 	''' takes python list of languages for ref and host'''
+	import re
 	lanrank = 0
-	language_ref = str(language_ref).lower()
-	language_host = str(language_host).lower()
+
+	# language will be comma or colon separated string
+	languages_ref = re.split('; |, ',languages_ref)
+	languages_host = re.split('; |, ',languages_host)
+	
+	languages_ref =[str(lan).lower() for lan in languages_ref]
+	languages_host =[str(lan).lower() for lan in languages_host]
 
 
 	for language in languages_ref:
@@ -113,4 +119,13 @@ if __name__ == '__main__':
 	matchrank=age_rank(usr1_dob,usr2_dob,matchrank)
 	print(usr1_dob)
 	print(usr2_dob)
+	print("matchrank: %i" %matchrank)
+
+	print('---- testing language rank ----')
+	matchrank = 0
+	languages_ref = 'English, Spanish, German'
+	languages_host = 'English; German; Italian'
+	print(languages_ref)
+	print(languages_host)
+	matchrank = language_rank(languages_ref,languages_host,matchrank)
 	print("matchrank: %i" %matchrank)
