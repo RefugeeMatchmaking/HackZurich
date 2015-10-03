@@ -46,6 +46,9 @@ class Handler(webapp2.RequestHandler):
 		self.write(self.render_str(template, **kw))
 
 
+class MainPage(Handler):
+	def get(self):
+		self.render("home.html")
 
 
 class Index(Handler):
@@ -194,6 +197,7 @@ class Match(Handler):
 		'''
 
 app = webapp2.WSGIApplication([
+	('/', MainPage),
 	('/index', Index),
 	('/refugee', Names),
 	('/languages', Languages),
