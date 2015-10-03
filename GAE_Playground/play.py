@@ -13,7 +13,7 @@ tempplate_dir = os.path.join(os.path.dirname(__file__),'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(tempplate_dir), autoescape=True)
 
 userinfo={"Status":"","firstname":"","surname":"","Languages":[],"Gender":"","Gender_Pref":"","DOB":"",
-	"About":"","Email":""}
+	"About":"","Location":"", "Email":""}
 
 class UserInfo(db.Model): #used to crete the database. Art is the name of the databse
 	Status=db.StringProperty(required=True) #required = true adds the constraint
@@ -25,6 +25,7 @@ class UserInfo(db.Model): #used to crete the database. Art is the name of the da
 	DOB=db.StringProperty(required=True)
 	About=db.StringProperty(required=False)
 	Email=db.StringProperty(required=True)
+	Location=db.StringProperty(required=True)
 	#password=db.StringProperty(required=True)
 	created=db.DateTimeProperty(auto_now_add=True) #Automatically adds the time, check the docs
 
@@ -46,7 +47,7 @@ class Handler(webapp2.RequestHandler):
 class Index(Handler):
 	def get(self):
 		userinfo={"Status":"","firstname":"","surname":"","Languages":[],"Gender":"","Gender_Pref":"","DOB":"",
-	"About":"","Email":""}
+	"About":"","Location":"", "Email":""}
 		self.render("index.html")
 
 	def post(self):
@@ -131,15 +132,24 @@ class AboutYou(Handler):
 class Email(Handler):
 	def get(self):
 		self.render("email.html")
-		print 'email received'
 	def post(self):
 		email = self.request.get("Email")
 		if email != '':
 			userinfo["Email"] = email
-			print userinfo
-			self.redirect('/match')
+			self.redirect('/location')
 		else: 
 			self.redirect('/email')
+
+class Location(Handler):
+	def get(self):
+		self.render("location.html")
+	def post(self):
+		Location = self.request.get("Location")
+		if Location != '':
+			userinfo["Location"] = Location
+			self.redirect('/match')
+		else: 
+			self.redirect('/location')
 		
 
 class Match(Handler):
@@ -150,9 +160,16 @@ class Match(Handler):
 		newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
 			surname=userinfo["surname"],Languages=userinfo["Languages"],
 			Gender=userinfo["Gender"], Gender_Pref=userinfo["Gender_Pref"],
-			DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"])
+			DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"],
+			Location=userinfo["Location"])
 
 		newuser.put()
+
+''' How to read the database https://cloud.google.com/appengine/docs/python/datastore/queries
+		database=db.GqlQuery("SELECT * FROM UserInfo")
+		q=UserInfo.all()
+		print q
+		'''
 
 app = webapp2.WSGIApplication([
 	('/index', Index),
@@ -163,6 +180,7 @@ app = webapp2.WSGIApplication([
 	('/dob', DOB),
 	('/about-yourself', AboutYou),
 	('/email', Email),
+	('/location',Location),
 	('/match', Match),
 
 ], debug=True)
