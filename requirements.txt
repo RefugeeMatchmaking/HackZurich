@@ -3,3 +3,4 @@ virtualenvwrapper
 Pillow
 django-grappelli
 pytz
+django-ipware
