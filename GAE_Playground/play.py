@@ -225,6 +225,7 @@ class Match(Handler):
 		else:
 			template_values=None
 
+		print("score:" + str(score))
 		self.render("match.html", template_values=template_values)
 
 	def post(self):
