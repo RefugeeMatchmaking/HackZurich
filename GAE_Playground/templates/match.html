@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+	<meta HTTP-EQUIV="X-UA-COMPATIBLE" CONTENT="IE=EmulateIE9" >
+    <script type="text/javascript" src="scripts/d3.min.js"></script>
+    <script type="text/javascript" src="scripts/radialProgress.js"></script>
+
     <div class="row"> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 
@@ -9,8 +13,13 @@
  	{{item}} <br>
  	{%endfor%}
  	<br>
+ 	<h5>Your Match Score is {{score}}%</h5>
+ 	
+ 	<br>
  	<h6> You will receive an email shortly with contact information to plan your walk in the park </h6>
    <!--- <h6> Depending on the profiles in the database this could take anywhere between a few seconds to a month </h6> -->
+
+
 
    {% else %}
    <h5> Thank You for Your Response, you will receive an email once a match is found </h5>
@@ -19,10 +28,12 @@
     </div>
 
 
+
+
       <div class="row">  <hr>
       	<h6> If you want to edit your data or make some changes to your profile then register an account here </h6>
       	
-         <a class="button" href="register">Register</a> 
+         <a class="button" href="register">Register Account</a> 
          <!--- <input type="submit" value="Next">   -->  
       </div>
 {% endblock %}

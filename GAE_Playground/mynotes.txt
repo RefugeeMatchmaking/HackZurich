@@ -1,12 +1,26 @@
-			if mail.is_email_valid(email):
-				sender_address = "refugeelighthouse@gmail.com Support <refugeelighthouse@gmail.com>"
-				subject = "Confirm your registration"
-				body = " Thank you for creating an account!"
-				mail.send_mail(sender_address, email, subject, body)
-				print 'email sent'
-				self.redirect('/match')
+if square:
+			namelist=[]
+			namelist.append(person.firstname for person in square)
+
+			template_values= ([(person.firstname +' '+ person.surname) for person in square])
+			# string = ''.join([person.firstname for person in square])
+			# template_values = {'text':string,}
+		else:
+			template_values=None
+
+		self.render("match.html", template_values=template_values)
 
 
+ {% if template_values %}
+    <h5> And Your Matches Are </h5>
+ 	{%for item in template_values%} 
+ 	{{item}} <br>
+ 	{%endfor%}
+ 	<br>
+ 	<h6> You will receive an email shortly with contact information to plan your walk in the park </h6>
+   <!--- <h6> Depending on the profiles in the database this could take anywhere between a few seconds to a month </h6> -->
 
+   {% else %}
+   <h5> Thank You for Your Response, you will receive an email once a match is found </h5>
 
-				from google.appengine.api import mail
+   {% endif %}
