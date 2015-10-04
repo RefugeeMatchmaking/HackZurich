@@ -3,7 +3,12 @@
     <div class="row"> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 
- <p> Text: {{template_values.text}} </p>
+    <h5> And Your Matches Are </h5>
+ 	{%for item in template_values%} 
+ 	{{item}} <br>
+ 	{%endfor%}
+ 	<br>
+ 	<h6> You will receive an email shortly with contact information to plan your walk in the park </h6>
    <!--- <h6> Depending on the profiles in the database this could take anywhere between a few seconds to a month </h6> -->
     </div>
 

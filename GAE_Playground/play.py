@@ -196,7 +196,7 @@ class Match(Handler):
 			DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
 			Location="Laax", Latitude=latitude, Longitude=longitude)'''
 
-		newuser.put()
+		#newuser.put()
 
 		#Create fake database. Comment this out later
 		#mygetdata= getdata() #Initialise instance of class
@@ -214,8 +214,13 @@ class Match(Handler):
 		square, score = get_square(newuser,local,refugees)
 		#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 		#print x
-		string = ''.join([person.firstname for person in square])
-		template_values = {'text':string,}
+		namelist=[]
+		namelist.append(person.firstname for person in square)
+		print '-----------________'
+		print [person.firstname for person in square]
+		template_values= ([(person.firstname +' '+ person.surname) for person in square])
+		# string = ''.join([person.firstname for person in square])
+		# template_values = {'text':string,}
 		
 
 		self.render("match.html", template_values=template_values)
