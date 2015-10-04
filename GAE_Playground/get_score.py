@@ -22,7 +22,7 @@ def get_score(User1, User2):
 	today = date.today()
 	usr1_age = today.year - int(usr1_dob[2])
 	usr2_age = today.year - int(usr2_dob[2])
-	matchrank += exp(-((usr1_age - usr2_age)**2)/(10.0)) # add a Gaussian factor
+	matchrank += exp(-((usr1_age - usr2_age)**2)/(5.0)) # add a Gaussian factor
 
 
 	""" Ignore for now """

@@ -12,7 +12,7 @@ SECRET='pjiscool'
 DATABASE_FETCH_LIMIT = 500 # max number of users to fetch from the db
 
 from google.appengine.ext import db
-from ReadmyDatabase import getdata
+from ReadmyDatabase import *
 from lat_long import *
 from get_score import *
 
@@ -54,8 +54,8 @@ class Handler(webapp2.RequestHandler):
 class MainPage(Handler):
 	def get(self):
 		self.render("home.html")
-		#mydata=getdata()
-		#mydata.createdatabase(UserInfo)
+		mydata=getdata()
+		mydata.createdatabase(UserInfo)
 
 
 class Index(Handler):
@@ -185,16 +185,16 @@ class Match(Handler):
 		latitude, longitude = lat_long(location)
 
 		#Save input into the database uncomment this for application
-		'''newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
+		newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
 			surname=userinfo["surname"],Languages=userinfo["Languages"],
 			Gender=userinfo["Gender"], Gender_Pref=userinfo["Gender_Pref"],
 			DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"],
-			Location=location, Latitude=latitude, Longitude=longitude)'''
-		newuser=UserInfo(Status="refugee",firstname="Bertold",
+			Location=location, Latitude=latitude, Longitude=longitude)
+		'''newuser=UserInfo(Status="refugee",firstname="Bertold",
 			surname="Brecht",Languages=["English"],
 			Gender="male", Gender_Pref="anyone",
 			DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
-			Location="Laax", Latitude=latitude, Longitude=longitude)
+			Location="Laax", Latitude=latitude, Longitude=longitude)'''
 
 		#newuser.put()
 
@@ -211,7 +211,7 @@ class Match(Handler):
 		refugees = q.filter("Status =", "refugee").fetch(limit=DATABASE_FETCH_LIMIT)
 		
 		print("newuser: " + str(newuser) + "\n refugees:" + str(refugees)+ "\n locals:"+str(local))
-		square = get_square(newuser,local,refugees)
+		square, score = get_square(newuser,local,refugees)
 		#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 		#print x
 		if square:
@@ -296,10 +296,21 @@ def get_square(node,local,refugees):
 		biparts = {}
 
 		for friend in scnd:
+			s1 = get_score(node,friend) 
+			
+			if s1 == -1:
+				continue # gender pref. discards
+
 			for friend_of_friend in frst:
 				if friend_of_friend is node:
 					continue # skip itself
-				cost = get_score(node,friend) + get_score(friend, friend_of_friend)
+				
+				s2 = get_score(friend, friend_of_friend)
+				if s2 == -1:
+					continue 
+
+				cost = s1 + s2
+
 				
 				if friend_of_friend in biparts:
 					biparts[friend_of_friend].append((friend, cost)) # slow 
@@ -318,6 +329,6 @@ def get_square(node,local,refugees):
 				square = [node,two_relatives[0][0],fof,two_relatives[1][0]]
 				highest = new_cost
 
-		return square;
+		return square, highest;
 
 
