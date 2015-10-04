@@ -54,6 +54,8 @@ class Handler(webapp2.RequestHandler):
 class MainPage(Handler):
 	def get(self):
 		self.render("home.html")
+		#mydata=getdata()
+		#mydata.createdatabase(UserInfo)
 
 
 class Index(Handler):

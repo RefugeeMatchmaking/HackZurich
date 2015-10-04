@@ -4,11 +4,13 @@
 
 import networkx as nx 
 from get_score import *
+from lat_long import *
 
 
 class getdata():
 
 	def createdatabase(self,UserInfo):
+		print '---------------------'
 		location = "Laax" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
 		newuser=UserInfo(Status="refugee",firstname="Hossein",
@@ -28,7 +30,7 @@ class getdata():
 		
 		location = "Zurich" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="",
+		newuser=UserInfo(Status="refugee",firstname="Jordan",
 			surname="Ceasar",Languages=["Italian", "English"],
 			Gender="male", Gender_Pref="own",
 			DOB="1994-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -81,9 +83,11 @@ class getdata():
 		newuser.put()
 
 
+
+
 		location = "Laax" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="Arnold",
+		newuser=UserInfo(Status="local",firstname="Arnold",
 			surname="Jr",Languages=["English","German"],
 			Gender="male", Gender_Pref="anyone",
 			DOB="1988-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -92,7 +96,7 @@ class getdata():
 
 		location = "Zurich" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="PJ",
+		newuser=UserInfo(Status="local",firstname="PJ",
 			surname="Jayathissa",Languages=["English","Spanish"],
 			Gender="male", Gender_Pref="anyone",
 			DOB="1988-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -101,7 +105,7 @@ class getdata():
 
 		location = "Zurich" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="Karoline",
+		newuser=UserInfo(Status="local",firstname="Karoline",
 			surname="Davierser",Languages=["English", "German"],
 			Gender="female", Gender_Pref="own",
 			DOB="1995-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -110,7 +114,7 @@ class getdata():
 
 		location = "Biel" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="Jonathon",
+		newuser=UserInfo(Status="local",firstname="Jonathon",
 			surname="paulanner",Languages=["English", "Spanish","Chinese"],
 			Gender="male", Gender_Pref="anyone",
 			DOB="1993-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -119,7 +123,7 @@ class getdata():
 
 		location = "Zurich" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="Sarah",
+		newuser=UserInfo(Status="local",firstname="Sarah",
 			surname="hausser",Languages=["English","German"],
 			Gender="female", Gender_Pref="own",
 			DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -128,7 +132,7 @@ class getdata():
 
 		location = "Zurich" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="Benjamin",
+		newuser=UserInfo(Status="local",firstname="Benjamin",
 			surname="Kuhler",Languages=["English", "German"],
 			Gender="male", Gender_Pref="anyone",
 			DOB="1968-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -137,7 +141,7 @@ class getdata():
 
 		location = "Laax" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="Martina",
+		newuser=UserInfo(Status="local",firstname="Martina",
 			surname="Bechler",Languages=["English","German"],
 			Gender="female", Gender_Pref="own",
 			DOB="1970-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -146,7 +150,7 @@ class getdata():
 
 		location = "Laax" #userinfo["Location"],
 		latitude, longitude = lat_long(location)
-		newuser=UserInfo(Status="refugee",firstname="Mika",
+		newuser=UserInfo(Status="local",firstname="Mika",
 			surname="Kirtal",Languages=["English", "German"],
 			Gender="female", Gender_Pref="anyone",
 			DOB="1980-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
@@ -154,9 +158,6 @@ class getdata():
 		newuser.put()
 
 
-
-
-		newuser.put()
 
 
 
