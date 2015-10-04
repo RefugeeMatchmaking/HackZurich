@@ -196,7 +196,7 @@ class Match(Handler):
 			DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
 			Location="Laax", Latitude=latitude, Longitude=longitude)'''
 
-		#newuser.put()
+		newuser.put()
 
 		#Create fake database. Comment this out later
 		#mygetdata= getdata() #Initialise instance of class
@@ -214,13 +214,8 @@ class Match(Handler):
 		square, score = get_square(newuser,local,refugees)
 		#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 		#print x
-		namelist=[]
-		namelist.append(person.firstname for person in square)
-		print '-----------________'
-		print [person.firstname for person in square]
-		template_values= ([(person.firstname +' '+ person.surname) for person in square])
-		# string = ''.join([person.firstname for person in square])
-		# template_values = {'text':string,}
+		string = ''.join([person.firstname for person in square])
+		template_values = {'text':string,}
 		
 
 		self.render("match.html", template_values=template_values)
@@ -328,6 +323,6 @@ def get_square(node,local,refugees):
 				square = [node,two_relatives[0][0],fof,two_relatives[1][0]]
 				highest = new_cost
 
-		return square, highest;
+		return square, (highest/8.0);
 
 
