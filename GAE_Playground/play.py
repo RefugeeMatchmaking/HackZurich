@@ -54,8 +54,8 @@ class Handler(webapp2.RequestHandler):
 class MainPage(Handler):
 	def get(self):
 		self.render("home.html")
-		mydata=getdata()
-		mydata.createdatabase(UserInfo)
+		#mydata=getdata()
+		#mydata.createdatabase(UserInfo)
 
 
 class Index(Handler):
@@ -192,7 +192,7 @@ class Match(Handler):
 			Location=location, Latitude=latitude, Longitude=longitude)
 		'''newuser=UserInfo(Status="refugee",firstname="Bertold",
 			surname="Brecht",Languages=["English"],
-			Gender="male", Gender_Pref="anyone",
+			Gender="male", Gender_Pref="any",
 			DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
 			Location="Laax", Latitude=latitude, Longitude=longitude)'''
 
@@ -212,6 +212,8 @@ class Match(Handler):
 		
 		print("newuser: " + str(newuser) + "\n refugees:" + str(refugees)+ "\n locals:"+str(local))
 		square, score = get_square(newuser,local,refugees)
+
+
 		#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 		#print x
 
@@ -222,10 +224,14 @@ class Match(Handler):
 			template_values= ([(person.firstname +' '+ person.surname) for person in square])
 			# string = ''.join([person.firstname for person in square])
 			# template_values = {'text':string,}
+			groupscore=int(score*100)
 		else:
 			template_values=None
+			groupscore=0
 
-		self.render("match.html", template_values=template_values)
+
+
+		self.render("match.html", template_values=template_values,score=groupscore)
 
 	def post(self):
 		self.redirect('/register')
