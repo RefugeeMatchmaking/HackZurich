@@ -224,7 +224,7 @@ class Email(Handler):
 			#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 			#print x
 			#if square exists (not empty)
-			if square:
+			if square and score>0.05:
 
 				template_values= ([(person.firstname +' '+ person.surname) for person in square])
 				# string = ''.join([person.firstname for person in square])
