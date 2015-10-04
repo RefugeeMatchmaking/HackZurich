@@ -229,7 +229,7 @@ class Email(Handler):
 				template_values= ([(person.firstname +' '+ person.surname) for person in square])
 				# string = ''.join([person.firstname for person in square])
 				# template_values = {'text':string,}
-				groupscore=int(score*100) #convert to percentages
+				groupscore = int(score*100.0)#convert to percentages
 				print '------------------'
 				print email 
 				#Write email to user confirming match
@@ -260,7 +260,6 @@ class Email(Handler):
 class Match(Handler):
 	def get(self):
 		self.render("match.html",template_values=None, score=None)
-
 
 	def post(self):
 		self.redirect('/register')
@@ -360,6 +359,6 @@ def get_square(node,local,refugees):
 				square = [node,two_relatives[0][0],fof,two_relatives[1][0]]
 				highest = new_cost
 
-		return square, (highest/8.0);
+		return square, (highest/4.0);
 
 
