@@ -233,11 +233,11 @@ class Email(Handler):
 				print '------------------'
 				print email 
 				#Write email to user confirming match
-				if mail.is_email_valid(email):
-					sender_address = "refugeelighthouse@gmail.com Support <refugeelighthouse@gmail.com>"
-					subject = "Confirm your registration"
-					body =  """Congratulations on finding a match"""
-					mail.send_mail(sender_address, email, subject, body)
+				# if mail.is_email_valid(email):
+				# 	sender_address = "refugeelighthouse@gmail.com Support <refugeelighthouse@gmail.com>"
+				# 	subject = "Confirm your registration"
+				# 	body =  """Congratulations on finding a match"""
+				# 	mail.send_mail(sender_address, email, subject, body)
 					
 
 			else:
