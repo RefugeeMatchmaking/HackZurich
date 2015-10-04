@@ -175,7 +175,7 @@ class Email(Handler):
 
 class Match(Handler):
 	def get(self):
-		self.render("match.html")
+		
 		print'-------------------------------'
 		print userinfo
 		
@@ -209,9 +209,14 @@ class Match(Handler):
 		refugees = q.filter("Status =", "refugee").fetch(limit=DATABASE_FETCH_LIMIT)
 		
 		print("newuser: " + str(newuser) + "\n refugees:" + str(refugees)+ "\n locals:"+str(local))
-		print(get_square(newuser,local,refugees))
+		square = get_square(newuser,local,refugees)
 		#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 		#print x
+		string = ''.join([person.firstname for person in square])
+		template_values = {'text':string,}
+		
+
+		self.render("match.html", template_values=template_values)
 
 	def post(self):
 		self.redirect('/register')
