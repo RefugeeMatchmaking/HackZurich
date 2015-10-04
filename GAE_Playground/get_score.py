@@ -8,8 +8,8 @@ def get_score(User1, User2):
 	matchrank = 0.0
 
 	#strict rule on gender preference
-	#if gender_preference_rank(User1.Gender, User2.Gender, User1.Gender_Pref, User2.Gender_Pref, matchrank) == -1 :
-	#	return -1;
+	if gender_preference_rank(User1.Gender, User2.Gender, User1.Gender_Pref, User2.Gender_Pref) == -1 :
+		return -1;
 	
 	# distance scoring
 	distance = haversine(User1.Longitude, User1.Latitude, User2.Longitude, User2.Latitude)

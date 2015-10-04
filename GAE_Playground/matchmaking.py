@@ -21,8 +21,10 @@ def location_rank(loc_ref, loc_host, matchrank):
 
 	return matchrank
 
-def gender_preference_rank(gender_ref, gender_host, genderpref_ref, genderpref_host, matchrank):
+def gender_preference_rank(gender_ref, gender_host, genderpref_ref, genderpref_host):
 	
+	matchrank = 0
+
 	#make sure everything is string
 	gender_ref = str(gender_ref)
 	gender_host = str(gender_host)
@@ -32,7 +34,7 @@ def gender_preference_rank(gender_ref, gender_host, genderpref_ref, genderpref_h
 	if gender_ref == gender_host:
 		matchrank+=1 # no problems here
 
-	elif gender_ref != gender_host and genderpref_ref == "anyone" and gernderpref_ref == "anyone":
+	elif gender_ref != gender_host and genderpref_ref == "anyone" and gernderpref_host == "anyone":
 		matchrank+=1 # no problems here
 
 	else: 
