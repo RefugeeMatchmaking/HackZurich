@@ -214,9 +214,16 @@ class Match(Handler):
 		square, score = get_square(newuser,local,refugees)
 		#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 		#print x
-		string = ''.join([person.firstname for person in square])
-		template_values = {'text':string,}
-		
+
+		if square:
+			namelist=[]
+			namelist.append(person.firstname for person in square)
+
+			template_values= ([(person.firstname +' '+ person.surname) for person in square])
+			# string = ''.join([person.firstname for person in square])
+			# template_values = {'text':string,}
+		else:
+			template_values=None
 
 		self.render("match.html", template_values=template_values)
 
