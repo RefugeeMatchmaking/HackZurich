@@ -11,17 +11,23 @@ sys.path.insert(0, 'libs')
 SECRET='pjiscool'
 DATABASE_FETCH_LIMIT = 500 # max number of users to fetch from the db
 
-from google.appengine.ext import db
+from google.appengine.ext import db #Database
+
+#Self made functions
 from ReadmyDatabase import *
 from lat_long import *
 from get_score import *
 
+#Set up template directory
 tempplate_dir = os.path.join(os.path.dirname(__file__),'templates')
+#Set Up JinJa Environment
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(tempplate_dir), autoescape=True)
 
+#Create a global dictionary to store newuser data
 userinfo={"Status":"","firstname":"","surname":"","Languages":[],"Gender":"","Gender_Pref":"","DOB":"",
 	"About":"","Location":"", "Email":""}
 
+#User Database Model
 class UserInfo(db.Model): #used to crete the database. Art is the name of the databse
 	Status=db.StringProperty(required=True) #required = true adds the constraint
 	firstname=db.StringProperty(required=True)
@@ -39,6 +45,7 @@ class UserInfo(db.Model): #used to crete the database. Art is the name of the da
 	created=db.DateTimeProperty(auto_now_add=True) #Automatically adds the time, check the docs
 
 
+#Handler for write commands
 class Handler(webapp2.RequestHandler):
 	def write(self,*a,**kw): #the * takes unamed arguments, and the ** takes the named arguments
 		self.response.out.write(*a,**kw)
@@ -50,14 +57,14 @@ class Handler(webapp2.RequestHandler):
 	def render(self, template, **kw):
 		self.write(self.render_str(template, **kw))
 
-
+#Home Page. Also has the possiblilty to generate a fixed database for trialing
 class MainPage(Handler):
 	def get(self):
 		self.render("home.html")
 		#mydata=getdata()
 		#mydata.createdatabase(UserInfo)
 
-
+#Clears userinfo and gets status(refugee or local)
 class Index(Handler):
 	def get(self):
 		userinfo={"Status":"","firstname":"","surname":"","Languages":[],"Gender":"","Gender_Pref":"","DOB":"",
@@ -69,6 +76,7 @@ class Index(Handler):
 		print (str(userinfo))		
 		self.redirect('/refugee')
 
+#Gets first name and last name
 class Names(Handler):
 	def get(self):
 		self.render("refugee.html")
@@ -80,7 +88,7 @@ class Names(Handler):
 		
 		userinfo["firstname"] = first
 		userinfo["surname"] = last
-
+#Check if field is full
 		if first != '' and last != '': 
 			print userinfo	
 			self.redirect('/location')
@@ -89,6 +97,8 @@ class Names(Handler):
 			print("Choose a valid name - print this" )
 			pass;
 
+#Quire location. Note that computation is done via coordinates so this will be processed 
+#later
 class Location(Handler):
 	def get(self):
 		self.render("location.html")
@@ -100,7 +110,7 @@ class Location(Handler):
 		else: 
 			self.redirect('/location')
 
-
+#language, no matching function yet for this
 class Languages(Handler):
 	def get(self):
 		self.render("languages.html")
@@ -118,6 +128,7 @@ class Languages(Handler):
 		else:
 			self.redirect('/languages')
 
+#Gender and preference of gender
 class Gender(Handler):
 	def get(self):
 		self.render("gender.html")
@@ -135,6 +146,7 @@ class Gender_Pref(Handler):
 		print userinfo
 		self.redirect('/dob')
 
+#Page of date of birth
 class DOB(Handler):
 	def get(self):
 		self.render("dob.html")
@@ -147,6 +159,7 @@ class DOB(Handler):
 		else:
 			self.redirect('/dob')
 
+#Optional Input for 'About You?'
 class AboutYou(Handler):
 	def get(self):
 		self.render("about-yourself.html")
@@ -155,6 +168,7 @@ class AboutYou(Handler):
 		print userinfo
 		self.redirect('/email')
 
+#Aquire email and SUBMIT
 class Email(Handler):
 	def get(self):
 		self.render("email.html")
@@ -162,89 +176,105 @@ class Email(Handler):
 		email = self.request.get("Email")
 		if email != '':
 			userinfo["Email"] = email
-			if mail.is_email_valid(email):
-				sender_address = "refugeelighthouse@gmail.com Support <refugeelighthouse@gmail.com>"
-				subject = "Confirm your registration"
-				body = " Thank you for creating an account!"
-				mail.send_mail(sender_address, email, subject, body)
-				print 'email sent'
-				self.redirect('/match')
+			
+
+
 		else: 
 			self.redirect('/email')
+		
+
+		if email != '':
+			#Start Computing the Registration
+
+			#Bigin computing the location coordinates
+			location = userinfo['Location'] #can have unicode bug
+			latitude, longitude = lat_long(location)
+
+			#Save input into the database uncomment this for application
+			newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
+				surname=userinfo["surname"],Languages=userinfo["Languages"],
+				Gender=userinfo["Gender"], Gender_Pref=userinfo["Gender_Pref"],
+				DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"],
+				Location=str(location), Latitude=latitude, Longitude=longitude)
+			#This can be uncommented for debugging. comment the top
+			'''newuser=UserInfo(Status="refugee",firstname="Bertold",
+				surname="Brecht",Languages=["English"],
+				Gender="male", Gender_Pref="any",
+				DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
+				Location="Laax", Latitude=latitude, Longitude=longitude)'''
+
+			newuser.put()
+
+			#Create fake database. Comment this out later
+			#mygetdata= getdata() #Initialise instance of class
+			#mygetdata.createdatabase(UserInfo) #Import database
+			#Querry the db and 
+
+			#likely stupid and inefficient , but works :) 
+			q = UserInfo.all() 
+			local = q.filter("Status =", "local").fetch(limit=DATABASE_FETCH_LIMIT)
+			
+			q = UserInfo.all() 
+			refugees = q.filter("Status =", "refugee").fetch(limit=DATABASE_FETCH_LIMIT)
+			
+			print("newuser: " + str(newuser) + "\n refugees:" + str(refugees)+ "\n locals:"+str(local))
+			square, score = get_square(newuser,local,refugees)
+
+
+			#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
+			#print x
+			#if square exists (not empty)
+			if square:
+
+				template_values= ([(person.firstname +' '+ person.surname) for person in square])
+				# string = ''.join([person.firstname for person in square])
+				# template_values = {'text':string,}
+				groupscore=int(score*100) #convert to percentages
+				print '------------------'
+				print email 
+				#Write email to user confirming match
+				if mail.is_email_valid(email):
+					sender_address = "refugeelighthouse@gmail.com Support <refugeelighthouse@gmail.com>"
+					subject = "Confirm your registration"
+					body =  """Congratulations on finding a match"""
+					mail.send_mail(sender_address, email, subject, body)
+					
+
+			else:
+				template_values=None
+				groupscore=0
+
+
+
+			self.render("match.html", template_values=template_values,score=groupscore)
+
+
+
+
+
+
 
 
 		
-
+#In case of accidental redirect
 class Match(Handler):
 	def get(self):
-		
-		print'-------------------------------'
-		print userinfo
-		
-		location = "Laax" #userinfo["Location"],
-		latitude, longitude = lat_long(location)
+		self.render("match.html",template_values=None, score=None)
 
-		#Save input into the database uncomment this for application
-		newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
-			surname=userinfo["surname"],Languages=userinfo["Languages"],
-			Gender=userinfo["Gender"], Gender_Pref=userinfo["Gender_Pref"],
-			DOB=userinfo["DOB"], About=userinfo["About"], Email=userinfo["Email"],
-			Location=location, Latitude=latitude, Longitude=longitude)
-		'''newuser=UserInfo(Status="refugee",firstname="Bertold",
-			surname="Brecht",Languages=["English"],
-			Gender="male", Gender_Pref="any",
-			DOB="2000-30-6", About="lorem ipsum", Email="lorem@lorem.uk",
-			Location="Laax", Latitude=latitude, Longitude=longitude)'''
-
-		newuser.put()
-
-		#Create fake database. Comment this out later
-		#mygetdata= getdata() #Initialise instance of class
-		#mygetdata.createdatabase(UserInfo) #Import database
-		#Querry the db and 
-
-		#likely stupid and inefficient , but works :) 
-		q = UserInfo.all() 
-		local = q.filter("Status =", "local").fetch(limit=DATABASE_FETCH_LIMIT)
-		
-		q = UserInfo.all() 
-		refugees = q.filter("Status =", "refugee").fetch(limit=DATABASE_FETCH_LIMIT)
-		
-		print("newuser: " + str(newuser) + "\n refugees:" + str(refugees)+ "\n locals:"+str(local))
-		square, score = get_square(newuser,local,refugees)
-
-
-		#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
-		#print x
-
-		if square:
-			namelist=[]
-			namelist.append(person.firstname for person in square)
-
-			template_values= ([(person.firstname +' '+ person.surname) for person in square])
-			# string = ''.join([person.firstname for person in square])
-			# template_values = {'text':string,}
-			groupscore=int(score*100)
-		else:
-			template_values=None
-			groupscore=0
-
-
-
-		self.render("match.html", template_values=template_values,score=groupscore)
 
 	def post(self):
 		self.redirect('/register')
 
+#Register for an account at refugeelighthouse
+#-needs a sequre log in and databasing of informaiton
 class Register(Handler):
 	def get(self):
 		self.render("register.html")
 
 	def post(self):
-		print '-----------------'
 		self.redirect('/review')
 
-
+#Send a review
 class Review(Handler):
 	def get(self):
 		self.render("review.html")
@@ -256,12 +286,6 @@ class ThankYou(Handler):
 	def get(self):
 		self.render("thankyou.html")
 
-
-''' How to read the database https://cloud.google.com/appengine/docs/python/datastore/queries
-		database=db.GqlQuery("SELECT * FROM UserInfo")
-		q=UserInfo.all()
-		print q
-		'''
 
 app = webapp2.WSGIApplication([
 	('/', MainPage),
@@ -282,7 +306,7 @@ app = webapp2.WSGIApplication([
 ], debug=True)
 
 
-
+#Function from Vojta, move away from here
 def get_square(node,local,refugees):
 		""" Returns a quadruplet of nodes refugee-refugee-local-local.
 			Incredibly rusty, but will work"""
