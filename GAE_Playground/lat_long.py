@@ -2,14 +2,19 @@ import requests
 
 def lat_long(city):
 	''' function to return latitude and longitude information based on city name '''
-	
-	response = requests.get('http://maps.googleapis.com/maps/api/geocode/json?address='+str(city))
-	resp_json_payload = response.json()
+	try:
+		response = requests.get('http://maps.googleapis.com/maps/api/geocode/json?address='+str(city))
+		resp_json_payload = response.json()
 
-	latlong = resp_json_payload['results'][0]['geometry']['location']
-	
-	lat = latlong['lat']
-	lng = latlong['lng']
+		latlong = resp_json_payload['results'][0]['geometry']['location']
+		
+		lat = latlong['lat']
+		lng = latlong['lng']
+
+	except:
+		lat=4.5
+		lng=2.5
+
 
 	#lat = 
 
