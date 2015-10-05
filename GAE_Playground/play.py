@@ -187,8 +187,12 @@ class Email(Handler):
 			#Start Computing the Registration
 
 			#Bigin computing the location coordinates
-			location = userinfo['Location'] #can have unicode bug
-			latitude, longitude = lat_long(location)
+			try:
+				location = userinfo['Location'] #can have unicode bug
+				latitude, longitude = lat_long(location)
+			except:
+				latitude=3.5
+				longitude=2.5
 
 			#Save input into the database uncomment this for application
 			newuser=UserInfo(Status=userinfo["Status"],firstname=userinfo["firstname"],
@@ -217,9 +221,12 @@ class Email(Handler):
 			q = UserInfo.all() 
 			refugees = q.filter("Status =", "refugee").fetch(limit=DATABASE_FETCH_LIMIT)
 			
-			print("newuser: " + str(newuser) + "\n refugees:" + str(refugees)+ "\n locals:"+str(local))
-			square, score = get_square(newuser,local,refugees)
-
+			try:
+				print("newuser: " + str(newuser) + "\n refugees:" + str(refugees)+ "\n locals:"+str(local))
+				square, score = get_square(newuser,local,refugees)
+			except:
+				square=[]
+				score=0
 
 			#x = mygetdata.readdatabase(q, newuser) #run readydatabase.py method, readdatabase
 			#print x
