@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'users/skeleton.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'users/normalize.css' %}" />
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Refugee Lighthouse</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="row"> 
+			<div class="two-thirds column" style="margin-top: 20%">
+				<h1 class="title">Refugee Ligthouse (Prototype)</h1>
+				<h6>Bringing Refugees with Locals for a Walk in the Park</h6>
+        		<hr>
+
+					{% block content %}
+    				{% endblock %}
+
+				
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

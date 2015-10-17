@@ -1,5 +1,7 @@
-{% load staticfiles %}
-<!DOCTYPE html>
+{% extends "users/base.html" %}
+{% block content %}
 
 <p>{{ user.user_key }}</p>
 <p>{{ user.first_name }} {{ user.last_name }}</p>
+
+{% endblock %}
