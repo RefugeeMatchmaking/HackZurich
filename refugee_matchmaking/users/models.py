@@ -3,9 +3,12 @@ from django.utils import timezone
 from django.conf import settings
 from ipware.ip import get_ip
 import uuid
+import sys
 
+sys.path.append('./algorithms')
+from lat_long import lat_long
 #Self created functions
-from users.algorithms.lat_long import lat_long
+#from users.algorithms.lat_long import lat_long
 
 class User(models.Model):
     GENDER = (

@@ -1,5 +1,7 @@
-from users.algorithms.matchmaking import *
-from users.algorithms.earth_distance import *
+#from users.algorithms.matchmaking import *
+#from users.algorithms.earth_distance import *
+from matchmaking import *
+from earth_distance import *
 from datetime import date
 import math
 

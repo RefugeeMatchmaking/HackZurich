@@ -1,9 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from ipware.ip import get_ip
-from .models import User, Language
-from .forms import UserForm
+import sys
+
+#extend python path at runtime
+sys.path.append('./algorithms')
+from models import User, Language
+from forms import UserForm
+from get_square import *
 #from users.algorithms.get_square import * #Throws an error as get_square.py can't import other files
+
 
 def add_user(request):
     if request.method == "POST":
