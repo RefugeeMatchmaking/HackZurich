@@ -2,12 +2,17 @@
 Project to allow refugees to better integrate after relocating.
 
 ## Installation
+Navigate to the folder with the vagrant file and run
 `vagrant up`
+It is usally a good idea to also run
+'vagrant provision'
 
 ## Usage
+SSH into the virtual machine
+'vagrant ssh'
 The environment is ready for working directly, you just have to set up the database if you don't have one already set up. Then you can run the server with `runserver` or with proper wsgi means.
 ```bash
-# You should be in the (refugee_matchmaking) environment here
+# You should be in the (refugee_matchmaking) environment here. This is the directory that contains the manage.py script
 cd refugee_matchmaking/
 python3 manage.py migrate
 
@@ -16,6 +21,10 @@ python3 manage.py createsuperuser
 python3 manage.py runserver 0.0.0.0:8000
 ```
 Now you can visit [http://locahost:8000/admin](http://localhost:8000/admin) and log in with your credentials. 
+
+##Tests
+You can test the website by running
+python3 manage.py test users 
 
 
 ## Google App Engine
