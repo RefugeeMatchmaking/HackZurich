@@ -12,8 +12,13 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+#import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+#PJ added these two lines to help call the functions from users/algorithms
+#PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+#sys.path.append(os.path.join(PROJECT_ROOT, 'refugee_matchmaking'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,6 +31,7 @@ SECRET_KEY = '50+g%2q$+1m#nw+@8ea^kwn(eyv(jnty%3^14!zxsm&7xe0*t*'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -109,3 +115,7 @@ PROJECT_DIR = os.path.dirname(__file__)
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 GRAPPELLI_ADMIN_TITLE = 'Refugee Matchmaking'
+
+
+#Algorithm Files (python scripts, added by PJ)
+#os.path.join(BASE_DIR, 'algorithms')

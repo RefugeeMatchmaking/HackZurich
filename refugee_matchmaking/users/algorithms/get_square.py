@@ -1,8 +1,7 @@
 import sys
-from lat_long import *
-from get_score import *
-#from users.algorithims.lat_long import *
-#from users.algorithims.get_score import *
+
+from .lat_long import *
+from .get_score import *
 
 
 

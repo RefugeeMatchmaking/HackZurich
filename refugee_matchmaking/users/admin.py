@@ -11,7 +11,7 @@ class UserAdmin(admin.ModelAdmin):
 	inlines = [LanguageInline]
 	list_display = ('first_name', 'location', 'gender','latitude_longitude')
 
-	#Add some function which cacluates the logitude and lattitude when the admin inputs the data
+
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Language)

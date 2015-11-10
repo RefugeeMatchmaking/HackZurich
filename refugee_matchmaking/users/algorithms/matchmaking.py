@@ -1,5 +1,5 @@
 #from users.algorithms.earth_distance import get_earth_distance
-from earth_distance import get_earth_distance
+from .earth_distance import get_earth_distance
 from datetime import date
 
 matchrank = 0

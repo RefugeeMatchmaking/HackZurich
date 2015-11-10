@@ -4,11 +4,13 @@ from ipware.ip import get_ip
 import sys
 
 #extend python path at runtime
-sys.path.append('./algorithms')
-from models import User, Language
-from forms import UserForm
-from get_square import *
-#from users.algorithms.get_square import * #Throws an error as get_square.py can't import other files
+#sys.path.append('./algorithms') #Doesn't really work...
+
+
+from .models import User, Language
+from .forms import UserForm
+#from get_square import *
+from users.algorithms.get_square import * #Throws an error as get_square.py can't import other files
 
 
 def add_user(request):
