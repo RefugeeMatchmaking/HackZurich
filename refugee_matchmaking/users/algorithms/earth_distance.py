@@ -1,7 +1,7 @@
 import json
 #from urllib.request import urlopen
 from math import radians, cos, sin, asin, sqrt
-from .lat_long import *
+from .lat_long import lat_long
 
 def get_earth_distance(loc1, loc2):
 	'''Function that returns the haversine distance between two locations'''

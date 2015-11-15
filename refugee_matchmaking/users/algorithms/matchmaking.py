@@ -34,7 +34,7 @@ def gender_preference_rank(gender_ref, gender_host, genderpref_ref, genderpref_h
 
 	if gender_ref == gender_host:
 		matchrank+=1 # no problems here
-	elif gender_ref != gender_host and genderpref_ref == "anyone" and genderpref_host == "anyone":
+	elif gender_ref != gender_host and genderpref_ref == "A" and genderpref_host == "A":
 		matchrank+=1 # no problems here
 
 	else: 

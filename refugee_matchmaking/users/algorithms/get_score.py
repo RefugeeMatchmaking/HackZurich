@@ -1,7 +1,6 @@
-#from users.algorithms.matchmaking import *
-#from users.algorithms.earth_distance import *
-from .matchmaking import *
-from .earth_distance import *
+
+from .matchmaking import gender_preference_rank
+from .earth_distance import haversine
 from datetime import date
 import math
 
@@ -16,12 +15,13 @@ def get_score(User1, User2):
 	
 	# distance scoring
 	#haversine has no children
+
 	distance = haversine(User1.latitude_longitude[1], User1.latitude_longitude[0], User2.latitude_longitude[1], User2.latitude_longitude[0])
 	matchrank += 20.0/(20.0 + distance) # Falls down to 0.5 at 20 km
 
 	# age scoring
-	usr1_dob = str(user1.birthdate).split('-')
-	usr2_dob = str(user2.birthdate).split('-')
+	usr1_dob = str(User1.birthdate).split('-')
+	usr2_dob = str(User2.birthdate).split('-')
 
 	today = date.today()
 	usr1_age = today.year - int(usr1_dob[0])

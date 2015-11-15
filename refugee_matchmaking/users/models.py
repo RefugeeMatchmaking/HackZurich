@@ -42,8 +42,11 @@ class User(models.Model):
     #Add Flag Field ('Normal', 'Reported', 'Malicious')
     #Add Matched Field ('Waiting', 'Matched')
 
-    def latitude_longitude(self):
+    #Method to get the latitude and logitude and create a property
+    def get_latitude_longitude(self):
         return lat_long(self.location)
+    latitude_longitude=property(get_latitude_longitude)
+
         # try:
         #     return lat_long(self.location)
         # except:
@@ -55,6 +58,7 @@ class User(models.Model):
             self.user_key = uuid.uuid1().hex[:10]
         super(User, self).save()
 
+    #For better printing of the user in the database
     def __str__(self):
         return self.last_name
 
