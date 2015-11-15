@@ -3,6 +3,7 @@ import json
 from math import radians, cos, sin, asin, sqrt
 from .lat_long import lat_long
 
+
 def get_earth_distance(loc1, loc2):
 	'''Function that returns the haversine distance between two locations'''
 	
@@ -20,6 +21,7 @@ def get_earth_distance(loc1, loc2):
 
 
 def haversine(lon1, lat1, lon2, lat2):
+
 	lon1, lat1, lon2, lat3 = map(radians,[lon1, lat1, lon2, lat2])
 
 	dlon = lon2 - lon1
@@ -27,10 +29,12 @@ def haversine(lon1, lat1, lon2, lat2):
 	a = sin(dlat/2)**2 + cos(lat1)*cos(lat2)*sin(dlon/2)**2
 	c = 2*asin(sqrt(a))
 	r = 6371
-	return c*r #[m]
+	ans=c*r
 
+	return ans #[m]
 
-if __name__ == "__main__":
-	earth_distance = get_earth_distance("koeln","bonn")
-	print(earth_distance)
+#What is this for? _Asked_By_PJ
+# if __name__ == "__main__":
+# 	earth_distance = get_earth_distance("koeln","bonn")
+# 	print(earth_distance)
 	

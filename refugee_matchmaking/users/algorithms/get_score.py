@@ -4,20 +4,35 @@ from .earth_distance import haversine
 from datetime import date
 import math
 
+import time #For speeed checking
+
 def get_score(User1, User2):
 	#initialize score
 	matchrank = 0.0
 
 	#strict rule on gender preference
 	#Gender_preference_rank has no children
+
 	if gender_preference_rank(User1.gender, User2.gender, User1.gender_preference, User2.gender_preference) == -1 :
 		return -1;
-	
-	# distance scoring
-	#haversine has no children
 
-	distance = haversine(User1.latitude_longitude[1], User1.latitude_longitude[0], User2.latitude_longitude[1], User2.latitude_longitude[0])
+
+	# distance scoring
+	t1=time.time()
+	"""This is the bottleneck of the code!!!!!!!!!!------------------------------"""
+	lon1 =User1.latitude_longitude[1]
+	lat1 =User1.latitude_longitude[0]
+	lon2 =User2.latitude_longitude[1] 
+	lat2 =User2.latitude_longitude[0]
+	"""------------------------------------------------------------------------------"""
+
+	t2=time.time()
+	print('databasecalling takes',t2-t1,'seconds to run')
+
+	distance = haversine(lon1, lat1, lon2, lat2)
 	matchrank += 20.0/(20.0 + distance) # Falls down to 0.5 at 20 km
+
+
 
 	# age scoring
 	usr1_dob = str(User1.birthdate).split('-')
@@ -26,6 +41,9 @@ def get_score(User1, User2):
 	today = date.today()
 	usr1_age = today.year - int(usr1_dob[0])
 	usr2_age = today.year - int(usr2_dob[0]) #pulls out of range error
+
+
+
 	matchrank += math.exp(-((usr1_age - usr2_age)**2)/(10.0)) # add a Gaussian factor
 
 

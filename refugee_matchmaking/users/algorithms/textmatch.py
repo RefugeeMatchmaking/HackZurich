@@ -72,7 +72,8 @@ if __name__ == '__main__':
 	I have a band in which I play the guitar. In my spare time I do a lot of rock climbing.\
 	People should help each other and meet.'
 
-
+	string1=""
+	string2=""
 
 
 	matchscore, matchcount, matchwords = textmatch(string1,string2)

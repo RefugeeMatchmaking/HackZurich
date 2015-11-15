@@ -45,13 +45,9 @@ class User(models.Model):
     #Method to get the latitude and logitude and create a property
     def get_latitude_longitude(self):
         return lat_long(self.location)
+    #This is really slow!! We want to be calling the database for the lat long values. Not calling the function to compute it    
     latitude_longitude=property(get_latitude_longitude)
 
-        # try:
-        #     return lat_long(self.location)
-        # except:
-        #     return (1.0,1.0)
-        #     print('Warning: could not access lat_long, incorrect lat and long applied')
 
     def save(self):
         if not self.user_key:

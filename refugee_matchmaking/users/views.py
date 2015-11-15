@@ -9,7 +9,7 @@ from .models import User, Language
 from .forms import UserForm
 
 #Import Dataprocessing functions from algorithms folder
-from users.algorithms.get_square import get_square
+from users.algorithms.get_square_V2 import get_square
 
 
 def add_user(request):
@@ -51,4 +51,3 @@ def matchNewUser(pk):
         score=get_square(user, all_locals, all_refugees)
 
         print('score is:', score)
-        
