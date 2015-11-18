@@ -12,6 +12,11 @@ def textmatch(targetstring,string_from_database):
 	matchwords = []
 	filterwords = ['are','like','i']
 
+	# make sure strings are not empty
+	if not targetstring or not string_from_database:
+		print("ERROR: Please provide valid strings")
+		return None, None, None
+
 	text1 = nltk.word_tokenize(targetstring.lower())
 	tags1 = nltk.pos_tag(text1)
 
@@ -77,6 +82,12 @@ if __name__ == '__main__':
 
 
 	matchscore, matchcount, matchwords = textmatch(string1,string2)
-	print('Matchscore %.2f'%matchscore)
-	print('Matchcount %i'%matchcount)
-	print('Matchwords %s'%matchwords)
+	try:
+		print('Matchscore %.2f'%matchscore)
+		print('Matchcount %i'%matchcount)
+		print('Matchwords %s'%matchwords)
+	except:
+		print('Could not print')
+		print(matchscore)
+		print(matchcount)
+		print(matchwords)
