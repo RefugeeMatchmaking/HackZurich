@@ -41,9 +41,9 @@ class User(models.Model):
     lon = models.FloatField() # longitude
     
     # three language options. only one required
-    language1 = models.CharField(max_length=7, choices=settings.LANGUAGES)
-    language2 = models.CharField(max_length=7, choices=settings.LANGUAGES,blank=True)
-    language3 = models.CharField(max_length=7, choices=settings.LANGUAGES,blank=True)
+    language_1 = models.CharField(max_length=7, choices=settings.LANGUAGES)
+    language_2 = models.CharField(max_length=7, choices=settings.LANGUAGES,blank=True)
+    language_3 = models.CharField(max_length=7, choices=settings.LANGUAGES,blank=True)
 
     # boolean field indicating wheater user has been matched
     matched = models.BooleanField(default=False)
