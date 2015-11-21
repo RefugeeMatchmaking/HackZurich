@@ -21,11 +21,13 @@ def get_score(User1, User2):
 
 	# distance scoring
 	t1=time.time()
-	
-	lon1 = User1.lon
-	lat1 = User1.lat
-	lon2 = User2.lon
-	lat2 = User2.lat
+
+	"""This is the bottleneck of the code!!!!!!!!!!------------------------------"""
+	lon1 =User1.lon
+	lat1 =User1.lat
+	lon2 =User2.lon
+	lat2 =User2.lat
+	"""------------------------------------------------------------------------------"""
 
 	t2=time.time()
 	print('databasecalling takes',t2-t1,'seconds to run')
