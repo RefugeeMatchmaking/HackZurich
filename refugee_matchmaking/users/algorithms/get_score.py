@@ -3,6 +3,7 @@ from .matchmaking import gender_preference_rank
 from .earth_distance import haversine
 from datetime import date
 import math
+from .textmatch import textmatch
 
 import time #For speeed checking
 
@@ -46,6 +47,18 @@ def get_score(User1, User2):
 
 
 	matchrank += math.exp(-((usr1_age - usr2_age)**2)/(10.0)) # add a Gaussian factor
+
+
+	# text based scoring
+	usr1_text = str(User1.about)
+	usr2_text = str(User2.about)
+
+	matchscore_text, matchcount_text, matchwords_text = \
+		textmatch(usr1_text,usr2_text)
+
+	if not matchscore_text == None:
+		print('textmatch_rank %f'%matchscore_text)
+		matchrank += matchscore_text
 
 
 	""" Ignore for now """

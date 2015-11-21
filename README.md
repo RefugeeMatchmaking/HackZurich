@@ -12,11 +12,11 @@ SSH into the virtual machine
 'vagrant ssh'
 The environment is ready for working directly, you just have to set up the database if you don't have one already set up. Then you can run the server with `runserver` or with proper wsgi means.
 ```bash
-# You should be in the (refugee_matchmaking) environment here. This is the directory that contains the manage.py script
+You should be in the (refugee_matchmaking) environment here. This is the directory that contains the manage.py script
 cd refugee_matchmaking/
 python3 manage.py migrate
 
-#You'll have to put in a user and password here, for example admin and admin
+You'll have to put in a user and password here, for example admin and admin
 python3 manage.py createsuperuser
 python3 manage.py runserver 0.0.0.0:8000
 ```
