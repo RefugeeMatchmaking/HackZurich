@@ -10,7 +10,7 @@ from .forms import UserForm
 
 #Import Dataprocessing functions from algorithms folder
 from users.algorithms.get_square_V2 import get_square
-
+from users.algorithms.lat_long import lat_long
 
 def add_user(request):
     if request.method == "POST":
@@ -22,6 +22,13 @@ def add_user(request):
             #Set IP
             user.submission_ip = ip
             
+            # temporarily here. Please move this to the form and 
+            # check if lat/long data are available before saving
+            
+            lat, lon = lat_long(user.location)
+
+            user.lat = lat
+            user.lon = lon 
 
             user.save()
             matchNewUser(pk=user.pk)
