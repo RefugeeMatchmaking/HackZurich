@@ -50,7 +50,7 @@ class User(models.Model):
 
     #Add Password Field
     #Add Flag Field ('Normal', 'Reported', 'Malicious')
-    #Add Matched Field ('Waiting', 'Matched')
+   
 
     #Method to get the latitude and logitude and create a property
     #This is really slow!! We want to be calling the database for the lat long values. Not calling the function to compute it    
