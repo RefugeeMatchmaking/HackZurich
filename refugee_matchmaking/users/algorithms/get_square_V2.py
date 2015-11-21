@@ -8,7 +8,7 @@ def get_square(node,all_locals,all_refugees):
 	""" Returns a quadruplet of nodes refugee-refugee-local-local.
 			Incredibly rusty, but will work"""
 
-
+	square = []
 	threshold=0.1 #Set threshold for a linear match (ie match between two people)
 	highest = -float("inf") #variable for finding the highest score
 	triangle={} #A dictionary of triangluar matches. A triangular match consists of three people. Node, friend, friend_of friend
