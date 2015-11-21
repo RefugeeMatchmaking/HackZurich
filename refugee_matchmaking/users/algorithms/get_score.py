@@ -23,8 +23,8 @@ def get_score(User1, User2):
 	usr1_languages= [User1.language_1,User1.language_2,User1.language_3]
 	usr2_languages= [User2.language_1,User2.language_2,User2.language_3]
 
-	print(usr1_languages)
-	print(usr2_languages)
+	#print(usr1_languages)
+	#print(usr2_languages)
 
 	lanscore = 0
 	for lan in usr1_languages:
@@ -39,12 +39,10 @@ def get_score(User1, User2):
 	# distance scoring
 	t1=time.time()
 
-	"""This is the bottleneck of the code!!!!!!!!!!------------------------------"""
 	lon1 =User1.lon
 	lat1 =User1.lat
 	lon2 =User2.lon
 	lat2 =User2.lat
-	"""------------------------------------------------------------------------------"""
 
 	t2=time.time()
 	print('databasecalling takes',t2-t1,'seconds to run')
