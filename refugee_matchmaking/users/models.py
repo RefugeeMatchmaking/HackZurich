@@ -39,6 +39,14 @@ class User(models.Model):
     submission_ip = models.GenericIPAddressField(protocol='both', blank=True, null=True, editable=False)
     lat = models.FloatField() # lattitude
     lon = models.FloatField() # longitude
+    
+    # three language options. only one required
+    language_1 = models.CharField(max_length=7, choices=settings.LANGUAGES)
+    language_2 = models.CharField(max_length=7, choices=settings.LANGUAGES,blank=True)
+    language_3 = models.CharField(max_length=7, choices=settings.LANGUAGES,blank=True)
+
+    # boolean field indicating wheater user has been matched
+    matched = models.BooleanField(default=False)
 
     #Add Password Field
     #Add Flag Field ('Normal', 'Reported', 'Malicious')
