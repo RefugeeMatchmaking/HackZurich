@@ -42,20 +42,10 @@ class User(models.Model):
     #Add Flag Field ('Normal', 'Reported', 'Malicious')
     #Add Matched Field ('Waiting', 'Matched')
 
-<<<<<<< HEAD
     def latitude_longitude(self):
         """ Method to get the latitude and logitude and create a property """
         mylat_long=lat_long(self.location)
         return mylat_long
-=======
-    #Method to get the latitude and logitude and create a property
-    def get_latitude_longitude(self):
-        return lat_long(self.location)
->>>>>>> parent of d91ebdb... initial commit
-    #This is really slow!! We want to be calling the database for the lat long values. Not calling the function to compute it    
-    
-    #latitude_longitude=property(t_latitude_longitude)
-
 
     def save(self):
         if not self.user_key:
