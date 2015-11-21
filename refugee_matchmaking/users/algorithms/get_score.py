@@ -8,8 +8,7 @@ from .textmatch import textmatch
 import time #For speeed checking
 
 def get_score(User1, User2):
-	""" Returns a match score between two users """
-	
+	#initialize score
 	matchrank = 0.0
 
 	#strict rule on gender preference
