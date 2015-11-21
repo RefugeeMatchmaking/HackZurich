@@ -10,7 +10,7 @@ import time #For speeed checking
 def get_score(User1, User2):
 	#initialize score
 	matchrank = 0.0
-	print('.......matching users........')
+	print(10*'='+'matching users'+10*'=')
 	#strict rule on gender preference
 	#Gender_preference_rank has no children
 
@@ -54,6 +54,7 @@ def get_score(User1, User2):
 	distancerank = 400.0/(200.0 + distance) - 1.0 
 	
 	if distancerank < 0 :
+		print('Distance to high!')
 		return -1
 
 	#matchrank += 20.0/(20.0 + distance) # Falls down to 0.5 at 20 km
