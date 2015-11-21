@@ -26,6 +26,13 @@ Now you can visit [http://locahost:8000/admin](http://localhost:8000/admin) and 
 You can test the website by running
 python3 manage.py test users 
 
+##NLTK
+NLKT database is being used for text matching. You will need to manually download this. Once it has been downloaded you will need to then download the pickle package.
+go to `python3`
+`import nltk`
+`nltk.download()`
+download `all`, `punkt`, and `book
+
 
 ## Google App Engine
 To open up in your local host while in the directory with play.py and app.yaml
