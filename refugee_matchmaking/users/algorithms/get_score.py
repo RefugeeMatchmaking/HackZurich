@@ -21,6 +21,7 @@ def get_score(User1, User2):
 
 	# distance scoring
 	t1=time.time()
+
 	"""This is the bottleneck of the code!!!!!!!!!!------------------------------"""
 	lon1 =User1.lon
 	lat1 =User1.lat
