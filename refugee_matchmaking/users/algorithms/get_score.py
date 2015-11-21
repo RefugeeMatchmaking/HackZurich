@@ -16,8 +16,25 @@ def get_score(User1, User2):
 
 	if gender_preference_rank(User1.gender, User2.gender, User1.gender_preference, User2.gender_preference) == -1 :
 		print('nogo condition for gener preference fulfilled')
-		return -1;
+		return -1
 
+	#language scoring
+	
+	usr1_languages= [User1.language_1,User1.language_2,User1.language_3]
+	usr2_languages= [User2.language_1,User2.language_2,User2.language_3]
+
+	print(usr1_languages)
+	print(usr2_languages)
+
+	lanscore = 0
+	for lan in usr1_languages:
+		if lan in usr2_languages:
+			lanscore +=1
+	#print(lanscore)
+
+	if lanscore < 1:
+		print('nogo condition for language fulfilled')
+		return -1 
 
 	# distance scoring
 	t1=time.time()
