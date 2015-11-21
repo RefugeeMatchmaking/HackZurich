@@ -10,11 +10,12 @@ import time #For speeed checking
 def get_score(User1, User2):
 	#initialize score
 	matchrank = 0.0
-
+	print('.......matching users........')
 	#strict rule on gender preference
 	#Gender_preference_rank has no children
 
 	if gender_preference_rank(User1.gender, User2.gender, User1.gender_preference, User2.gender_preference) == -1 :
+		print('nogo condition for gener preference fulfilled')
 		return -1;
 
 
@@ -31,8 +32,11 @@ def get_score(User1, User2):
 	print('databasecalling takes',t2-t1,'seconds to run')
 
 	distance = haversine(lon1, lat1, lon2, lat2)
-	matchrank += 20.0/(20.0 + distance) # Falls down to 0.5 at 20 km
-
+	print('Long1 %f Long2 %f Lat1')
+	distancerank = 20.0/(20.0 + distance) # Falls down to 0.5 at 20 km
+	#matchrank += 20.0/(20.0 + distance) # Falls down to 0.5 at 20 km
+	matchrank += distancerank
+	print('Distance rank: %f'%distancerank)
 
 
 	# age scoring
@@ -44,9 +48,10 @@ def get_score(User1, User2):
 	usr2_age = today.year - int(usr2_dob[0]) #pulls out of range error
 
 
-
-	matchrank += math.exp(-((usr1_age - usr2_age)**2)/(10.0)) # add a Gaussian factor
-
+	agerank = math.exp(-((usr1_age - usr2_age)**2)/(10.0)) # add a Gaussian factor 
+	#matchrank += math.exp(-((usr1_age - usr2_age)**2)/(10.0)) # add a Gaussian factor
+	matchrank += agerank
+	print('Age rank: %f'%agerank)
 
 	# text based scoring
 	usr1_text = str(User1.about)
@@ -56,7 +61,7 @@ def get_score(User1, User2):
 		textmatch(usr1_text,usr2_text)
 
 	if not matchscore_text == None:
-		print('textmatch_rank %f'%matchscore_text)
+		print('textmatch rank %f'%matchscore_text)
 		matchrank += matchscore_text
 
 
@@ -68,4 +73,5 @@ def get_score(User1, User2):
 	#	return -1
 	#by age
 	
+	print('Overall match rank: %f'%matchrank)
 	return matchrank
