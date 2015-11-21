@@ -6,6 +6,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+.vagrant/
 .Python
 env/
 build/
@@ -57,3 +58,6 @@ docs/_build/
 target/
 
 .DS_Store
+
+# .vagrant file
+.vagrant/
