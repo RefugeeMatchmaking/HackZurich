@@ -7,7 +7,8 @@ import math
 import time #For speeed checking
 
 def get_score(User1, User2):
-	#initialize score
+	""" Returns a match score between two users """
+	
 	matchrank = 0.0
 
 	#strict rule on gender preference

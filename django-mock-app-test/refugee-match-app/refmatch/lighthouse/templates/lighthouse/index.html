@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Lighthouse</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+  <link rel="stylesheet" href="{% static "css/skeleton.css" %}">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<body>
+  <div class="container">
+    <div class="row"> 
+      <div class="two-thirds column" style="margin-top: 20%">
+        <h1 class="title">Ligthouse</h1>
+        <h5>We guide refugees find new homes</h5>
+        <hr>
+      </div>
+    </div>
+     <div class="row"> 
+      <h6> Are you a refugee or a local? </h6>
+      {% if users %}
+      <ul>
+        {% for user in users %}
+          <li> {{user.first_name}} </li>
+        {% endfor %} 
+      </ul>
+      {% else %} 
+        <p> Lorem </p>
+      {% endif %} 
+
+        <a class="button" href="refugee.html">Refugee</a>  
+        <a class="button" href="">Local</a>  
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

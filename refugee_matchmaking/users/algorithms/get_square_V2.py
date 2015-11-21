@@ -6,28 +6,26 @@ import time #For speed checking
 #PJ Tried to make some comments to understand the code
 def get_square(node,all_locals,all_refugees):
 	""" Returns a quadruplet of nodes refugee-refugee-local-local.
-			Incredibly rusty, but will work"""
+		Incredibly rusty, but will work"""
 
-
-	threshold=0.1 #Set threshold for a linear match (ie match between two people)
+	threshold = 0.1 #Set threshold for a linear match (ie match between two people)
 	highest = -float("inf") #variable for finding the highest score
-	triangle={} #A dictionary of triangluar matches. A triangular match consists of three people. Node, friend, friend_of friend
-
+	triangle = {} #A dictionary of triangluar matches. A triangular match consists of three people. Node, friend, friend_of friend
+ 
 	# This determines what database we search first, and what we search second
 	if node.refugee_or_local == "L":
-		#Our node (user) is a local so we first want to search the refugee database
+		# Our node (user) is a local so we first want to search the refugee database
 		frst = all_refugees
 		scnd = all_locals
 
 	elif node.refugee_or_local=="R":
-		#Our node (user) is a refugee so we first want to search the local database
+		# Our node (user) is a refugee so we first want to search the local database
 		frst = all_locals
 		scnd = all_refugees
 
-	#Loop through the database and get scores
+	# Loop through the database and get scores
 	for friend in frst:
-
-
+		
 		s1 = get_score(node,friend)
 
 		if s1>threshold: #If the score is higher than the threshold then save it
