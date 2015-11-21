@@ -48,7 +48,7 @@ class User(models.Model):
         return mylat_long
     #This is really slow!! We want to be calling the database for the lat long values. Not calling the function to compute it    
     
-    #latitude_longitude=property(get_latitude_longitude)
+    #latitude_longitude=property(t_latitude_longitude)
 
 
     def save(self):
