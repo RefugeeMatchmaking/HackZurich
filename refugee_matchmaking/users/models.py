@@ -43,10 +43,12 @@ class User(models.Model):
     #Add Matched Field ('Waiting', 'Matched')
 
     #Method to get the latitude and logitude and create a property
-    def get_latitude_longitude(self):
-        return lat_long(self.location)
+    def latitude_longitude(self):
+        mylat_long=lat_long(self.location)
+        return mylat_long
     #This is really slow!! We want to be calling the database for the lat long values. Not calling the function to compute it    
-    latitude_longitude=property(get_latitude_longitude)
+    
+    #latitude_longitude=property(get_latitude_longitude)
 
 
     def save(self):
