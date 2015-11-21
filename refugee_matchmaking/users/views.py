@@ -49,12 +49,18 @@ def matchNewUser(pk):
     print('matchNewUser algorithm has been called')
 
     user= get_object_or_404(User, pk=pk)
-    print(user.gender_preference)
+
     all_locals=User.objects.filter(refugee_or_local='L', matched=False)
     all_refugees=User.objects.filter(refugee_or_local='R', matched=False)
 
     if len(all_locals)>2 and len(all_refugees)>2: 
         #Dont run score if there arn't enough people in the database
         score=get_square(user, all_locals, all_refugees)
+        matchedUsers=score[0]
+        if matchedUsers:
+            for matchedUser in matchedUsers:
+                matchedUser.matched=True
+                matchedUser.save()
 
         print('score is:', score)
+

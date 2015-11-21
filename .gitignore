@@ -61,3 +61,6 @@ target/
 
 # .vagrant file
 .vagrant/
+
+#Databse
+refugee_matchmaking/db.sqlite3
