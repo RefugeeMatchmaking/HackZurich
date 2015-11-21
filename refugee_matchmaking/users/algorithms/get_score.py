@@ -34,7 +34,13 @@ def get_score(User1, User2):
 
 	distance = haversine(lon1, lat1, lon2, lat2)
 	print('Long1 %f Long2 %f Lat1')
-	distancerank = 20.0/(20.0 + distance) # Falls down to 0.5 at 20 km
+
+	distancerank = 400.0/(200.0 + distance) - 1.0 
+	
+	if(distancerank < 0)
+		return -1
+
+	# Falls down to 0.5 at 20 km
 	#matchrank += 20.0/(20.0 + distance) # Falls down to 0.5 at 20 km
 	matchrank += distancerank
 	print('Distance rank: %f'%distancerank)
