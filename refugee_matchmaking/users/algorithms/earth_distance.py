@@ -22,7 +22,7 @@ def get_earth_distance(loc1, loc2):
 
 def haversine(lon1, lat1, lon2, lat2):
 
-	lon1, lat1, lon2, lat3 = map(radians,[lon1, lat1, lon2, lat2])
+	lon1, lat1, lon2, lat2 = map(radians,[lon1, lat1, lon2, lat2])
 
 	dlon = lon2 - lon1
 	dlat = lat2 - lat1
