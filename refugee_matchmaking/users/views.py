@@ -30,7 +30,7 @@ def add_user(request):
             user.lat = lat
             user.lon = lon 
 
-            user.save()
+            user.save() #save use
             matchNewUser(pk=user.pk)
             return redirect('user_detail', pk=user.pk, permanent=True)
     else:
