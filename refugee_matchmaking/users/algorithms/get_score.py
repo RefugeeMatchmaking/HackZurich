@@ -28,7 +28,7 @@ def get_score(User1, User2):
 
 	lanscore = 0
 	for lan in usr1_languages:
-		if lan in usr2_languages:
+		if lan in usr2_languages and not lan == '':
 			lanscore +=1
 	#print(lanscore)
 
