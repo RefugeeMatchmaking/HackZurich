@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
+from django.db.models import Max
 from ipware.ip import get_ip
 import sys
 
@@ -58,9 +59,15 @@ def matchNewUser(pk):
         score=get_square(user, all_locals, all_refugees)
         matchedUsers=score[0]
         if matchedUsers:
+            maxnumber=User.objects.all().aggregate(Max('groupnumber'))['groupnumber__max']
+            newgroupnumer=maxnumber+1
+            print('new group number is',newgroupnumer)
+
             for matchedUser in matchedUsers:
                 matchedUser.matched=True
+
+                matchedUser.groupnumber=newgroupnumer
                 matchedUser.save()
 
         print('score is:', score)
-
+    user=get_object_or_404(User, pk=pk)

@@ -45,6 +45,7 @@ class User(models.Model):
     language_2 = models.CharField(max_length=7, choices=settings.LANGUAGES,blank=True)
     language_3 = models.CharField(max_length=7, choices=settings.LANGUAGES,blank=True)
 
+    groupnumber=models.BigIntegerField(default=0)
     # boolean field indicating wheater user has been matched
     matched = models.BooleanField(default=False)
 
