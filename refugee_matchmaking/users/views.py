@@ -51,8 +51,8 @@ def matchNewUser(pk):
 
     user= get_object_or_404(User, pk=pk)
 
-    all_locals=User.objects.filter(refugee_or_local='L', matched=False)
-    all_refugees=User.objects.filter(refugee_or_local='R', matched=False)
+    all_locals=User.objects.filter(refugee_or_local='L', matched=False, flag='N')
+    all_refugees=User.objects.filter(refugee_or_local='R', matched=False, flag='N')
 
     if len(all_locals)>2 and len(all_refugees)>2: 
         #Dont run score if there arn't enough people in the database

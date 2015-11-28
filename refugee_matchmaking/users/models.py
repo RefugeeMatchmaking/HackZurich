@@ -22,6 +22,13 @@ class User(models.Model):
         ('R', 'Refugee'),
         ('L', 'Local'),
     )
+
+    FLAGS= (
+        ('N', 'Normal'),
+        ('R', 'Reported'),
+        ('M', 'Malicious'),
+    )
+
     user_key = models.CharField(max_length=10, editable=False, primary_key=True, unique=True)
     refugee_or_local = models.CharField(choices=STATUS, max_length=1)
     first_name = models.CharField(max_length=100)
@@ -48,7 +55,7 @@ class User(models.Model):
     groupnumber=models.BigIntegerField(default=0)
     # boolean field indicating wheater user has been matched
     matched = models.BooleanField(default=False)
-
+    flag = models.CharField(choices=FLAGS, default='N', max_length=1)
     #Add Password Field
     #Add Flag Field ('Normal', 'Reported', 'Malicious')
    

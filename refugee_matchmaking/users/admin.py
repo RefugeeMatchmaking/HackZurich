@@ -9,7 +9,7 @@ class UserAdmin(admin.ModelAdmin):
 	readonly_fields=('submitted', 'submission_ip')
 	model = User
 	inlines = [LanguageInline]
-	list_display = ('first_name', 'location', 'gender','lat', 'lon')
+	list_display = ('first_name', 'location', 'gender','lat', 'lon', 'groupnumber','flag')
 
 
 
