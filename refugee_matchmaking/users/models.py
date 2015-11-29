@@ -2,8 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from ipware.ip import get_ip
+
 import uuid
-import sys
 
 
 #Self created functions
@@ -25,7 +25,8 @@ class User(models.Model):
 
     FLAGS= (
         ('N', 'Normal'),
-        ('R', 'Reported'),
+        ('R', 'Reported',),
+        ('U', 'Unresponsive'),
         ('M', 'Malicious'),
     )
 
@@ -55,9 +56,11 @@ class User(models.Model):
     groupnumber=models.BigIntegerField(default=0)
     # boolean field indicating wheater user has been matched
     matched = models.BooleanField(default=False)
+    #To flag users as normal
     flag = models.CharField(choices=FLAGS, default='N', max_length=1)
-    #Add Password Field
-    #Add Flag Field ('Normal', 'Reported', 'Malicious')
+    #For future development
+    password = models.CharField(max_length=400, blank=True)
+   
    
 
     #Method to get the latitude and logitude and create a property
