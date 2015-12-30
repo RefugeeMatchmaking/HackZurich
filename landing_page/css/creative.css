@@ -60,6 +60,12 @@ p {
     background-color: #222;
 }
 
+.bg-dark-credits {
+    color: #fff;
+    background-color: #222;
+    margin-bottom: 0px;
+}
+
 .text-faded {
     color: rgba(255,255,255,.7);
 }
