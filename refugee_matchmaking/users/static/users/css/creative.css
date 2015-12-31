@@ -70,8 +70,19 @@ p {
     color: rgba(255,255,255,.7);
 }
 
+form {
+margin:auto;
+width:550px;
+line-height: 24px;
+}
 
+input    {
+display:block;
+}
 
+textarea{
+display:block;
+}
 
 
 section {
