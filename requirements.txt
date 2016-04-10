@@ -3,3 +3,7 @@ virtualenvwrapper
 django-grappelli
 pytz
 django-ipware
+gunicorn
+psycopg2
+requests
+nltk
